@@ -5,7 +5,7 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps) {
   return (
-    <div>
+    <div className="h-[100%]">
       {children}
       {/* {modal} */}
     </div>

@@ -18,6 +18,7 @@ const config = {
       }
     },
     fontSize: {
+      md: '17px',
       lg: '31px',
       xl: '64px'
     },

@@ -5,12 +5,15 @@ export default function Main() {
     <main className="flex flex-col justify-center shrink-[1] grow-[1] h-[100%]">
       <div>
         <div className="flex flex-row-reverse">
-          <div className="flex justify-center min-w-[45vw]">
+          <div className="flex min-w-[45vw]">
             <div className="flex items-center min-w-[437px] max-w-[760px] w-[100%] p-[20px]">
               <div>
                 <h1 className="text-xl font-bold">Happening now</h1>
                 <p className="text-lg font-bold mb-[32px]">Join today.</p>
                 <Button>Create account</Button>
+                <p className="mt-[40px] mb-[20px] text-md font-bold">
+                  Already have an account?
+                </p>
                 <Button>Sign in</Button>
               </div>
             </div>
