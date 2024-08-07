@@ -71,3 +71,13 @@
     height: 100%;
   }
 }
+
+@layer components {
+  .button {
+    @apply flex min-h-[40px] w-[300px] min-w-[36px] max-w-[380px] items-center justify-center rounded-[9999px] border-[1px] border-solid border-[#536471] px-[16px] text-[15px] font-bold text-[#1d9cf0];
+  }
+
+  .input {
+    @apply h-[56px] w-[100%] rounded-[4px] border-[1px] border-solid border-[#333639] bg-transparent px-8 text-[17px] text-[#e7e9ea];
+  }
+}

@@ -6,8 +6,8 @@ export default function SignupModal() {
   const onClickClose = () => {}
 
   return (
-    <div className="flex items-center justify-center fixed inset-0 bg-dimmed">
-      <div className="shrink-[1] min-w-[600px] min-h-[400px] max-w-[80vw] max-h-[90vh] h-[650px] bg-black p-[80px] rounded-md">
+    <div className="fixed inset-0 flex items-center justify-center bg-dimmed">
+      <div className="rounded-16 min-h-400 min-w-600 h-650 max-h-[90vh] max-w-[80vw] shrink-[1] bg-black p-80">
         <button onClick={onClickClose}>
           닫기
           {/* <svg
@@ -21,17 +21,20 @@ export default function SignupModal() {
             </g>
           </svg> */}
         </button>
-        <div className="text-lg font-bold mt-[20px] mb-[20px]">
-          Create your account
+        <div className="my-20 text-lg font-bold">Create your account</div>
+        <div className="my-12">
+          <input className="input" placeholder="Name" />
         </div>
-        <div className="mt-[12px] mb-[12px]">
-          <input placeholder="Name" />
-        </div>
-        <div className="mt-[12px] mb-[12px]">
-          <input placeholder="Phone" />
+        <div className="my-12">
+          <input className="input" placeholder="Phone" />
         </div>
         <div>
-          <Link href="">Next</Link>
+          <Link
+            className="button h-[50px] w-[100%] max-w-[100%] bg-white text-[#051419]"
+            href=""
+          >
+            Next
+          </Link>
         </div>
       </div>
     </div>

@@ -1,5 +1,18 @@
 import type { Config } from 'tailwindcss'
 
+const px0_10 = Object.fromEntries(
+  Array.from({ length: 11 }, (_, i) => [i, `${i}px`])
+)
+const px0_100 = Object.fromEntries(
+  Array.from({ length: 101 }, (_, i) => [i, `${i}px`])
+)
+const px0_200 = Object.fromEntries(
+  Array.from({ length: 201 }, (_, i) => [i, `${i}px`])
+)
+const px0_1000 = Object.fromEntries(
+  Array.from({ length: 1001 }, (_, i) => [i, `${i}px`])
+)
+
 const config = {
   darkMode: ['class'],
   content: [
@@ -9,6 +22,9 @@ const config = {
     './src/**/*.{ts,tsx}'
   ],
   prefix: '',
+  // corePlugins: {
+  //   preflight: false
+  // },
   theme: {
     container: {
       center: true,
@@ -61,25 +77,14 @@ const config = {
           foreground: 'hsl(var(--card-foreground))'
         }
       },
-      borderRadius: {
-        lg: 'var(--radius)',
-        md: '16px',
-        sm: 'calc(var(--radius) - 4px)'
-      },
-      keyframes: {
-        'accordion-down': {
-          from: { height: '0' },
-          to: { height: 'var(--radix-accordion-content-height)' }
-        },
-        'accordion-up': {
-          from: { height: 'var(--radix-accordion-content-height)' },
-          to: { height: '0' }
-        }
-      },
-      animation: {
-        'accordion-down': 'accordion-down 0.2s ease-out',
-        'accordion-up': 'accordion-up 0.2s ease-out'
-      }
+      borderRadius: px0_200,
+      minWidth: px0_1000,
+      minHeight: px0_1000,
+      maxWidth: px0_1000,
+      maxHeight: px0_1000,
+      padding: px0_200,
+      height: px0_1000,
+      spacing: px0_100
     }
   },
   plugins: [require('tailwindcss-animate')]
