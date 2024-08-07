@@ -24,6 +24,9 @@ const config = {
     },
     extend: {
       colors: {
+        dimmed: 'rgba(91, 112, 131, 0.4)',
+        white: '#fff',
+        black: '#000',
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
@@ -60,7 +63,7 @@ const config = {
       },
       borderRadius: {
         lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 2px)',
+        md: '16px',
         sm: 'calc(var(--radius) - 4px)'
       },
       keyframes: {

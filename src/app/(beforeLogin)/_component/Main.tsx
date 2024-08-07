@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 
 export default function Main() {
@@ -10,11 +11,11 @@ export default function Main() {
               <div>
                 <h1 className="text-xl font-bold">Happening now</h1>
                 <p className="text-lg font-bold mb-[32px]">Join today.</p>
-                <Button>Create account</Button>
+                <Link href="/i/flow/signup">Create account</Link>
                 <p className="mt-[40px] mb-[20px] text-md font-bold">
                   Already have an account?
                 </p>
-                <Button>Sign in</Button>
+                <Link href="/login">Sign in</Link>
               </div>
             </div>
           </div>
