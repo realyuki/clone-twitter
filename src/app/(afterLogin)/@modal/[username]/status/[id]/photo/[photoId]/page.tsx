@@ -5,8 +5,8 @@ export default function Default() {
     imageId: 1,
     link: faker.image.urlLoremFlickr(),
     Post: {
-      content: faker.lorem.text(),
-    },
+      content: faker.lorem.text()
+    }
   }
 
   return (

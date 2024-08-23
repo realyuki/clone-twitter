@@ -5,7 +5,7 @@ export default function Profile() {
   const user = {
     id: 'realyuki',
     nickname: '깽자',
-    image: '/realyuki.png',
+    image: '/realyuki.png'
   }
 
   return (

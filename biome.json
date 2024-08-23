@@ -64,7 +64,10 @@
         "useValidAriaValues": "error"
       },
       "style": { "useSelfClosingElements": "off" },
-      "suspicious": { "noExplicitAny": "off" }
+      "suspicious": { "noExplicitAny": "off" },
+      "correctness": {
+        "useExhaustiveDependencies": "off"
+      }
     }
   }
 }

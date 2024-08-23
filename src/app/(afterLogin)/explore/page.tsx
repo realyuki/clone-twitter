@@ -1,5 +1,5 @@
-import Trend from '../_component/Trend'
 import SearchForm from '../_component/SearchForm'
+import Trend from '../_component/Trend'
 
 export default function Explore() {
   return (

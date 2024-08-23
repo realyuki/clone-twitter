@@ -24,7 +24,7 @@ export default function PostImages({ post }: PostImagesProps) {
         href={`/${post.User.id}/status/${post.postId}/photo/${post.Images[0].imageId}`}
         style={{
           backgroundImage: `url(${post.Images[0]?.link})`,
-          backgroundSize: 'contain',
+          backgroundSize: 'contain'
         }}
       >
         <img src={post.Images[0]?.link} alt="" />
@@ -39,14 +39,14 @@ export default function PostImages({ post }: PostImagesProps) {
           href={`/${post.User.id}/status/${post.postId}/photo/${post.Images[0].imageId}`}
           style={{
             backgroundImage: `url(${post.Images[0]?.link})`,
-            backgroundSize: 'cover',
+            backgroundSize: 'cover'
           }}
         />
         <Link
           href={`/${post.User.id}/status/${post.postId}/photo/${post.Images[1].imageId}`}
           style={{
             backgroundImage: `url(${post.Images[1]?.link})`,
-            backgroundSize: 'cover',
+            backgroundSize: 'cover'
           }}
         />
       </div>
@@ -60,21 +60,21 @@ export default function PostImages({ post }: PostImagesProps) {
           href={`/${post.User.id}/status/${post.postId}/photo/${post.Images[0].imageId}`}
           style={{
             backgroundImage: `url(${post.Images[0]?.link})`,
-            backgroundSize: 'cover',
+            backgroundSize: 'cover'
           }}
         />
         <Link
           href={`/${post.User.id}/status/${post.postId}/photo/${post.Images[1].imageId}`}
           style={{
             backgroundImage: `url(${post.Images[1]?.link})`,
-            backgroundSize: 'cover',
+            backgroundSize: 'cover'
           }}
         />
         <Link
           href={`/${post.User.id}/status/${post.postId}/photo/${post.Images[2].imageId}`}
           style={{
             backgroundImage: `url(${post.Images[2]?.link})`,
-            backgroundSize: 'cover',
+            backgroundSize: 'cover'
           }}
         />
       </div>
@@ -88,28 +88,28 @@ export default function PostImages({ post }: PostImagesProps) {
           href={`/${post.User.id}/status/${post.postId}/photo/${post.Images[0].imageId}`}
           style={{
             backgroundImage: `url(${post.Images[0]?.link})`,
-            backgroundSize: 'cover',
+            backgroundSize: 'cover'
           }}
         />
         <Link
           href={`/${post.User.id}/status/${post.postId}/photo/${post.Images[1].imageId}`}
           style={{
             backgroundImage: `url(${post.Images[1]?.link})`,
-            backgroundSize: 'cover',
+            backgroundSize: 'cover'
           }}
         />
         <Link
           href={`/${post.User.id}/status/${post.postId}/photo/${post.Images[2].imageId}`}
           style={{
             backgroundImage: `url(${post.Images[2]?.link})`,
-            backgroundSize: 'cover',
+            backgroundSize: 'cover'
           }}
         />
         <Link
           href={`/${post.User.id}/status/${post.postId}/photo/${post.Images[3].imageId}`}
           style={{
             backgroundImage: `url(${post.Images[3]?.link})`,
-            backgroundSize: 'cover',
+            backgroundSize: 'cover'
           }}
         />
       </div>

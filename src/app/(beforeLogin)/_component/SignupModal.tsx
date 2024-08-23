@@ -21,7 +21,7 @@ export default function SignupModal() {
             </g>
           </svg> */}
         </button>
-        <div className="my-20 text-lg font-bold">Create your account</div>
+        <div className="my-20 font-bold text-lg">Create your account</div>
         <div className="my-12">
           <input className="input" placeholder="Name" />
         </div>

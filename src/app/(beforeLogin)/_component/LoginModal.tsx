@@ -6,8 +6,8 @@ export default function LoginModal() {
   const onClickClose = () => {}
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-dimmed">
-      <div className="rounded-16 h-650 min-h-400 min-w-600 flex max-h-[90vh] max-w-[80vw] shrink-[1] justify-center bg-black p-80">
-        <div className="max-w-364 box-border flex-[1] px-[32px]">
+      <div className="flex h-650 max-h-[90vh] min-h-400 min-w-600 max-w-[80vw] shrink-[1] justify-center rounded-16 bg-black p-80">
+        <div className="box-border max-w-364 flex-[1] px-[32px]">
           <button onClick={onClickClose}>
             닫기
             {/* <svg
@@ -21,7 +21,7 @@ export default function LoginModal() {
         </g>
       </svg> */}
           </button>
-          <div className="my-20 text-lg font-bold">Sign in to X</div>
+          <div className="my-20 font-bold text-lg">Sign in to X</div>
           <div className="my-12">
             <input className="input" placeholder="Phone, email, or username" />
           </div>

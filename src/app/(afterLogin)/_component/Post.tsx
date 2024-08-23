@@ -1,7 +1,7 @@
-import Link from 'next/link'
+import { faker } from '@faker-js/faker'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
-import { faker } from '@faker-js/faker'
+import Link from 'next/link'
 import PostArticle from './PostArticle'
 import PostImages from './PostImages'
 
@@ -14,11 +14,11 @@ export default function Post({ noImage }: { noImage?: boolean }) {
     User: {
       id: 'doguri',
       nickname: '도구리',
-      image: '/doguri.jpg',
+      image: '/doguri.jpg'
     },
     content: '도구리도구리',
     createAt: new Date(),
-    Images: [] as any[],
+    Images: [] as any[]
   }
 
   if (Math.random() > 0.5 && !noImage) {
@@ -26,7 +26,7 @@ export default function Post({ noImage }: { noImage?: boolean }) {
       { imageId: 1, link: faker.image.urlLoremFlickr() },
       { imageId: 2, link: faker.image.urlLoremFlickr() },
       { imageId: 3, link: faker.image.urlLoremFlickr() },
-      { imageId: 4, link: faker.image.urlLoremFlickr() },
+      { imageId: 4, link: faker.image.urlLoremFlickr() }
     )
   }
 
@@ -35,7 +35,13 @@ export default function Post({ noImage }: { noImage?: boolean }) {
       <div>
         <div>
           <Link href={`/${target.User.id}`}>
-            <img src={target.User.image} alt={target.User.nickname} width={40} height={40} className="rounded-[100%]" />
+            <img
+              src={target.User.image}
+              alt={target.User.nickname}
+              width={40}
+              height={40}
+              className="rounded-[100%]"
+            />
           </Link>
         </div>
         <div>

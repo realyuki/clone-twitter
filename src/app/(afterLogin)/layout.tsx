@@ -1,10 +1,10 @@
-import Link from 'next/link'
 import Image from 'next/image'
-import NavMenu from './_component/NavMenu'
-import TrendSection from './_component/TrandSection'
+import Link from 'next/link'
 import FollowRecommend from './_component/FollowRecommend'
 import LogoutButton from './_component/LogoutButton'
+import NavMenu from './_component/NavMenu'
 import RightSearchZone from './_component/RightSearchZone'
+import TrendSection from './_component/TrandSection'
 
 type Props = { children: React.ReactNode; modal: React.ReactNode }
 
@@ -23,7 +23,10 @@ export default function AfterLoginLayout({ children, modal }: Props) {
                   <NavMenu />
                 </ul>
                 <div className="w-[90%]">
-                  <Link href="/compose/tweet" className="button w-[100%] bg-[#1d9bf0] text-white">
+                  <Link
+                    href="/compose/tweet"
+                    className="button w-[100%] bg-[#1d9bf0] text-white"
+                  >
                     <span>Post</span>
                   </Link>
                 </div>
