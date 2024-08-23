@@ -7,7 +7,7 @@ export default function SignupModal() {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-dimmed">
-      <div className="rounded-16 min-h-400 min-w-600 h-650 max-h-[90vh] max-w-[80vw] shrink-[1] bg-black p-80">
+      <div className="h-650 max-h-[90vh] min-h-400 min-w-600 max-w-[80vw] shrink-[1] rounded-16 bg-black p-80">
         <button onClick={onClickClose}>
           닫기
           {/* <svg
