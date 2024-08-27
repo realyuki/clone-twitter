@@ -4,22 +4,24 @@ export default function FollowRecommend() {
   const onFollow = () => {}
 
   const user = {
-    id: 'realyuki2',
-    nickname: 'realyuki2',
-    image: '/yRsRRjGO.jpg'
+    id: 'ghiblipicture',
+    nickname: 'Studio Ghibli Pictures',
+    image: '/follower.jpg'
   }
 
   return (
-    <div>
-      <div>
-        <img src={user.image} alt={user.id} />
+    <div className="flex flex-row px-[16px] py-[12px]">
+      <div className="mr-[8px] h-[40px] w-[40px]">
+        <img src={user.image} alt={user.id} className="rounded-[100%]" />
+      </div>
+      <div className="flex grow-[1] flex-col">
+        <span className="text-[15px]">{user.nickname}</span>
+        <span className="text-[#71767b] text-[15px]">@{user.id}</span>
       </div>
       <div>
-        <div>{user.nickname}</div>
-        <div>@{user.id}</div>
-      </div>
-      <div>
-        <button onClick={onFollow}>팔로우</button>
+        <button onClick={onFollow} className="button w-[auto]">
+          Follow
+        </button>
       </div>
     </div>
   )

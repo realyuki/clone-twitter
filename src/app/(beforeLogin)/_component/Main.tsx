@@ -1,3 +1,4 @@
+import { MantineProvider, Notification } from '@mantine/core'
 import Link from 'next/link'
 
 export default function Main() {

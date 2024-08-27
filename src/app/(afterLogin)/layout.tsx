@@ -37,17 +37,21 @@ export default function AfterLoginLayout({ children, modal }: Props) {
         </header>
         <div className="flex grow-[1]">
           <div className="flex w-[1050px] flex-row justify-between">
-            <main className="flex w-[100%] max-w-[600px] shrink-[1] items-start">
+            <main className="flex w-[100%] max-w-[600px] shrink-[1] items-start border-border border-x">
               <div className="flex w-[100%] grow-[1] flex-col">{children}</div>
             </main>
-            <section className="mr-[70px] w-[350px]">
+            <section className="mr-[70px] flex w-[350px] flex-col gap-[12px] py-[12px]">
               <RightSearchZone />
               <TrendSection />
-              <div>
-                <h3>Who to follow</h3>
-                <FollowRecommend />
-                <FollowRecommend />
-                <FollowRecommend />
+              <div className="rounded-[16px] border border-border border-solid">
+                <div className="px-[16px] py-[12px]">
+                  <h3 className="font-bold text-[20px]">Who to follow</h3>
+                </div>
+                <div>
+                  <FollowRecommend />
+                  <FollowRecommend />
+                  <FollowRecommend />
+                </div>
               </div>
             </section>
           </div>

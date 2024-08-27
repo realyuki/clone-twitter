@@ -12,11 +12,11 @@ export default function Post({ noImage }: { noImage?: boolean }) {
   const target = {
     postId: 1,
     User: {
-      id: 'doguri',
-      nickname: '도구리',
+      id: 'doguri_official',
+      nickname: '도구리DOGURI',
       image: '/doguri.jpg'
     },
-    content: '도구리도구리',
+    content: '작은 악마가 되…. 👿',
     createAt: new Date(),
     Images: [] as any[]
   }
@@ -32,8 +32,8 @@ export default function Post({ noImage }: { noImage?: boolean }) {
 
   return (
     <PostArticle post={target}>
-      <div>
-        <div>
+      <div className="flex flex-row">
+        <div className="mr-[8px]">
           <Link href={`/${target.User.id}`}>
             <img
               src={target.User.image}
@@ -44,16 +44,23 @@ export default function Post({ noImage }: { noImage?: boolean }) {
             />
           </Link>
         </div>
-        <div>
-          <div>
+        <div className="grow-[1]">
+          <div className="mb-[2px] flex items-center gap-[4px]">
             <Link href={`/${target.User.id}`}>
-              <span>{target.User.nickname}</span>
-              <span>@{target.User.id}</span>
+              <span className="mr-[4px] font-bold text-[15px]">
+                {target.User.nickname}
+              </span>
+              <span className="text-[#71767b] text-[15px]">
+                @{target.User.id}
+              </span>
             </Link>
-            <span>{dayjs(target.createAt).fromNow(true)}</span>
+            <span className="text-[#71767b] text-[15px]">·</span>
+            <span className="text-[#71767b] text-[15px]">
+              {dayjs(target.createAt).fromNow(true)}
+            </span>
           </div>
           <div>{target.content}</div>
-          <div>
+          <div className="mt-[12px] overflow-hidden rounded-[16px]">
             <PostImages post={target} />
           </div>
           <div>Action button</div>

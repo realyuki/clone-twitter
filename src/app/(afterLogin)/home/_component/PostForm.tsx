@@ -20,14 +20,14 @@ export default function PostForm() {
 
   return (
     <form>
-      <div className="flex w-[100%] px-[16px]">
+      <div className="flex w-[100%] border-border border-b px-[16px] py-[12px]">
         <div>
           <img
             src={me.image}
             alt={me.id}
             width={40}
             height={40}
-            className="rounded-[100%]"
+            className="mr-[8px] rounded-[100%]"
           />
         </div>
         <div className="grow-[1]">
@@ -35,7 +35,7 @@ export default function PostForm() {
             value={content}
             onChange={onChange}
             placeholder="What is happening?!"
-            className="w-[100%] bg-transparent py-[12px] placeholder:text-placeholder"
+            className="w-[100%] resize-none bg-transparent py-[12px] placeholder:text-placeholder"
           />
           <div>
             <input

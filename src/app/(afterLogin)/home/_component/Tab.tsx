@@ -13,18 +13,29 @@ export default function Tab() {
   }
 
   return (
-    <div>
-      <div>Home</div>
-      <div>
-        <div onClick={onClickRec} className="cursor-pointer">
+    <div className="flex flex-row border-border border-b border-solid">
+      <div
+        onClick={onClickRec}
+        className="flex grow-[1] cursor-pointer justify-center text-[15px]"
+      >
+        <div className="relative flex h-[53px] items-center">
           For you
-          <div hidden={tab === 'fol'}></div>
+          <div
+            hidden={tab === 'fol'}
+            className="absolute bottom-0 h-[3px] w-[100%] bg-blue"
+          ></div>
         </div>
       </div>
-      <div>
-        <div onClick={onClickFol} className="cursor-pointer">
+      <div
+        onClick={onClickFol}
+        className="flex grow-[1] cursor-pointer justify-center text-[15px]"
+      >
+        <div className="relative flex h-[53px] items-center">
           Following
-          <div hidden={tab === 'rec'}></div>
+          <div
+            hidden={tab === 'rec'}
+            className="absolute bottom-0 h-[3px] w-[100%] bg-blue"
+          ></div>
         </div>
       </div>
     </div>
