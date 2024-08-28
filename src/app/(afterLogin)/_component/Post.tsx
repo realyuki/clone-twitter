@@ -50,12 +50,10 @@ export default function Post({ noImage }: { noImage?: boolean }) {
               <span className="mr-[4px] font-bold text-[15px]">
                 {target.User.nickname}
               </span>
-              <span className="text-[#71767b] text-[15px]">
-                @{target.User.id}
-              </span>
+              <span className="text-[15px] text-gray">@{target.User.id}</span>
             </Link>
-            <span className="text-[#71767b] text-[15px]">·</span>
-            <span className="text-[#71767b] text-[15px]">
+            <span className="text-[15px] text-gray">·</span>
+            <span className="text-[15px] text-gray">
               {dayjs(target.createAt).fromNow(true)}
             </span>
           </div>

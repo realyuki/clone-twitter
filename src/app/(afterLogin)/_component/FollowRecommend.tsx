@@ -16,13 +16,14 @@ export default function FollowRecommend() {
       </div>
       <div className="flex grow-[1] flex-col">
         <span className="text-[15px]">{user.nickname}</span>
-        <span className="text-[#71767b] text-[15px]">@{user.id}</span>
+        <span className="text-[15px] text-gray">@{user.id}</span>
       </div>
-      <div>
-        <button onClick={onFollow} className="button w-[auto]">
-          Follow
-        </button>
-      </div>
+      <button
+        onClick={onFollow}
+        className="button h-[32px] min-h-[32px] w-[auto] bg-white text-[#0f1419] text-[14px]"
+      >
+        <span className="leading-none">Follow</span>
+      </button>
     </div>
   )
 }

@@ -70,8 +70,10 @@
   html {
     height: 100%;
   }
-  input {
+  input, textarea {
     background: none;
+    outline: none;
+    resize: none;
   }
 }
 
@@ -81,6 +83,6 @@
   }
 
   .input {
-    @apply h-[56px] w-[100%] rounded-[4px] border-[1px] border-solid border-[#333639] bg-transparent px-8 text-[17px] text-[#e7e9ea];
+    @apply h-[56px] w-[100%] rounded-[4px] border-[1px] border-solid border-[#333639] bg-transparent px-8 text-[17px] text-white;
   }
 }

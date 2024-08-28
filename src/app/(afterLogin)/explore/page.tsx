@@ -4,11 +4,13 @@ import Trend from '../_component/Trend'
 export default function Explore() {
   return (
     <div>
-      <div>
+      <div className="px-[16px] py-[5px]">
         <SearchForm />
       </div>
       <div>
-        <h3>Trends for you</h3>
+        <div className="px-[16px] py-[12px]">
+          <h3 className="font-bold text-[20px]">Trends for you</h3>
+        </div>
         <Trend />
         <Trend />
         <Trend />

@@ -1,54 +1,42 @@
 'use client'
 
-import { type ChangeEventHandler, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 
-export default function PostForm() {
-  const imageRef = useRef<HTMLInputElement>(null)
+export default function CommentForm() {
   const [content, setContent] = useState('')
+  const imageRef = useRef<HTMLInputElement>(null)
+
+  const onClickButton = () => {}
+  const onSubmit = () => {}
+  const onChange = () => {}
+
   const me = {
     id: 'realyuki',
     image: '/realyuki.png'
   }
 
-  const onChange: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
-    setContent(e.target.value)
-  }
-
-  const onClickButton = () => {
-    imageRef.current?.click()
-  }
-
   return (
-    <form>
-      <div className="flex w-[100%] border-border border-b px-[16px] py-[12px]">
+    <form
+      onSubmit={onSubmit}
+      className="border-border border-b border-solid px-[16px] py-[14px]"
+    >
+      <div className="flex flex-row">
         <div>
           <img
+            width={40}
             src={me.image}
             alt={me.id}
-            width={40}
-            height={40}
             className="mr-[8px] rounded-[100%]"
           />
         </div>
-        <div className="grow-[1]">
-          <textarea
-            value={content}
-            onChange={onChange}
-            placeholder="What is happening?!"
-            className="w-[100%] resize-none bg-transparent py-[12px] placeholder:text-gray"
-          />
+        <div className="flex grow-[1] flex-col">
+          <textarea onChange={onChange} placeholder="Post your reply" />
           <div>
-            <input
-              type="file"
-              name="imageFiles"
-              multiple
-              hidden
-              ref={imageRef}
-            />
-            <div className="flex items-center justify-between">
+            <input type="file" multiple hidden ref={imageRef} />
+            <div className="flex flex-row justify-between">
               <button type="button" onClick={onClickButton}>
                 <svg
-                  width={20}
+                  width={24}
                   viewBox="0 0 24 24"
                   aria-hidden="true"
                   className="fill-blue"
@@ -62,7 +50,7 @@ export default function PostForm() {
                 disabled={!content}
                 className="button w-[auto] bg-blue text-white"
               >
-                Post
+                Reply
               </button>
             </div>
           </div>

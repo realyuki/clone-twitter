@@ -41,45 +41,16 @@ const config = {
     extend: {
       colors: {
         dimmed: 'rgba(91, 112, 131, 0.4)',
-        placeholder: '#71767B',
+        gray: '#71767B',
         blue: '#1d9bf0',
-        white: '#fff',
+        white: '#e7e9ea',
         black: '#000',
         border: '#2f3336',
         input: {
           background: '#202327'
         },
-        ring: 'hsl(var(--ring))',
         background: 'hsl(var(--background))',
-        foreground: 'hsl(var(--foreground))',
-        primary: {
-          DEFAULT: 'hsl(var(--primary))',
-          foreground: 'hsl(var(--primary-foreground))'
-        },
-        secondary: {
-          DEFAULT: 'hsl(var(--secondary))',
-          foreground: 'hsl(var(--secondary-foreground))'
-        },
-        destructive: {
-          DEFAULT: 'hsl(var(--destructive))',
-          foreground: 'hsl(var(--destructive-foreground))'
-        },
-        muted: {
-          DEFAULT: 'hsl(var(--muted))',
-          foreground: 'hsl(var(--muted-foreground))'
-        },
-        accent: {
-          DEFAULT: 'hsl(var(--accent))',
-          foreground: 'hsl(var(--accent-foreground))'
-        },
-        popover: {
-          DEFAULT: 'hsl(var(--popover))',
-          foreground: 'hsl(var(--popover-foreground))'
-        },
-        card: {
-          DEFAULT: 'hsl(var(--card))',
-          foreground: 'hsl(var(--card-foreground))'
-        }
+        foreground: 'hsl(var(--foreground))'
       },
       borderRadius: px0_200,
       minWidth: px0_1000,

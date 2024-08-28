@@ -25,17 +25,10 @@ export default function LogoutButton() {
           />
         </div>
         <div className="flex flex-col items-start">
-          <div>{me.nickname}</div>
-          <div>@{me.id}</div>
+          <span className="text-[15px]">{me.nickname}</span>
+          <span className="text-[15px] text-gray">@{me.id}</span>
         </div>
       </div>
-      {/* <div>
-        <svg width={18} viewBox='0 0 24 24' aria-hidden='true' className='fill-white'>
-          <g>
-            <path d='M3 12c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm9 2c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm7 0c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z'></path>
-          </g>
-        </svg>
-      </div> */}
     </button>
   )
 }

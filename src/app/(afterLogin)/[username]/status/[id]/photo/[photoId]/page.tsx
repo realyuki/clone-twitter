@@ -7,5 +7,10 @@ export default function Page({ params }: Props) {
   params.username // elonmusk
   params.id // 1
   params.photoId // 1
-  return <Home />
+  return (
+    <>
+      <Home />
+      ㄴㅇㄹㄴㅇㄹ
+    </>
+  )
 }
