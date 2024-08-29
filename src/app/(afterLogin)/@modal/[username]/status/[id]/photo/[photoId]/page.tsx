@@ -17,9 +17,8 @@ export default function Default() {
     <div className="fixed inset-0 bg-black">
       <CloseButton />
       <div className="flex grow-[1] flex-row justify-between">
-        <div>
+        <div className="flex h-[100vh] grow-[1] justify-center">
           <img src={photo.link} alt={photo.Post?.content} />
-          <div style={{ backgroundImage: `url(${photo.link})` }} />
         </div>
         <div className="w-[350px] border-border border-l border-solid">
           <Post noImage />
