@@ -12,7 +12,7 @@ export default function Main() {
                 <h1 className="font-bold text-xl">Happening now</h1>
                 <p className="mb-32 font-bold text-lg">Join today.</p>
                 <Link
-                  className="button bg-[#1d9cf0] text-[#fff]"
+                  className="button bg-blue text-white"
                   href="/i/flow/signup"
                 >
                   Create account
@@ -31,7 +31,7 @@ export default function Main() {
             <svg
               viewBox="0 0 24 24"
               aria-hidden="true"
-              className="h-[100%] max-h-380 w-[100%] fill-[#fff] p-32"
+              className="h-[100%] max-h-380 w-[100%] fill-white p-32"
             >
               <g>
                 <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>

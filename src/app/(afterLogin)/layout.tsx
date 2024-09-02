@@ -25,7 +25,7 @@ export default function AfterLoginLayout({ children, modal }: Props) {
                 <div className="w-[90%]">
                   <Link
                     href="/compose/tweet"
-                    className="button w-[100%] bg-[#1d9bf0] text-white"
+                    className="button w-[100%] bg-blue text-white"
                   >
                     <span>Post</span>
                   </Link>
