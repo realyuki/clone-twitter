@@ -61,8 +61,8 @@ const config = {
       height: px0_1000,
       spacing: px0_100
     }
-  },
-  plugins: [require('tailwindcss-animate')]
+  }
+  // plugins: [require('tailwindcss-animate')]
 } satisfies Config
 
 export default config
