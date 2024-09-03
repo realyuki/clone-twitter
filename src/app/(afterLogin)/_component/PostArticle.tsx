@@ -1,5 +1,7 @@
 'use client'
 
+import type { PostImage } from '@/model/PostImage'
+import type { User } from '@/model/User'
 import { useRouter } from 'next/navigation'
 
 type Props = {
@@ -7,20 +9,16 @@ type Props = {
   post: {
     postId: number
     content: string
-    User: {
-      id: string
-      nickname: string
-      image: string
-    }
-    createAt: Date
-    Images: any[]
+    User: User
+    createdAt: Date
+    images: PostImage[]
   }
 }
 
 export default function PostArticle({ children, post }: Props) {
   const router = useRouter()
   const onClick = () => {
-    router.push(`/${post.User.id}/status/${post.postId}`)
+    router.push(`/${post?.User.id}/status/${post.postId}`)
   }
 
   return (
