@@ -1,3 +1,4 @@
+import { auth } from '@/auth'
 import Image from 'next/image'
 import Link from 'next/link'
 import FollowRecommend from './_component/FollowRecommend'
@@ -8,30 +9,36 @@ import TrendSection from './_component/TrandSection'
 
 type Props = { children: React.ReactNode; modal: React.ReactNode }
 
-export default function AfterLoginLayout({ children, modal }: Props) {
+export default async function AfterLoginLayout({ children, modal }: Props) {
+  const session = await auth()
+
   return (
     <div className="flex">
       <div className="flex flex-[1]">
         <header className="flex grow-[1] basis-auto flex-col items-end">
           <section className="px-[8px]">
             <div className="w-[275px]">
-              <Link href="/home">
+              <Link href={`${session?.user ? 'home' : '/'}`}>
                 <Image src="/yRsRRjGO.jpg" alt="x.com" width={40} height={40} />
               </Link>
-              <nav>
-                <ul>
-                  <NavMenu />
-                </ul>
-                <div className="w-[90%]">
-                  <Link
-                    href="/compose/tweet"
-                    className="button w-[100%] bg-blue text-white"
-                  >
-                    <span>Post</span>
-                  </Link>
-                </div>
-              </nav>
-              <LogoutButton />
+              {session?.user && (
+                <>
+                  <nav>
+                    <ul>
+                      <NavMenu />
+                    </ul>
+                    <div className="w-[90%]">
+                      <Link
+                        href="/compose/tweet"
+                        className="button w-[100%] bg-blue text-white"
+                      >
+                        <span>Post</span>
+                      </Link>
+                    </div>
+                  </nav>
+                  <LogoutButton />
+                </>
+              )}
             </div>
           </section>
         </header>

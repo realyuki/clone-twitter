@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import AuthSession from './_component/AuthSession'
 import { MSWComponent } from './_component/MSWComponent'
 import './globals.css'
 
@@ -19,7 +20,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <MSWComponent />
-        {children}
+        <AuthSession>{children}</AuthSession>
       </body>
     </html>
   )

@@ -11,7 +11,7 @@ export default function SinglePost() {
       </div>
       <Post />
       <CommentForm />
-      <div className="flex">
+      <div className="flex flex-col">
         <Post />
         <Post />
         <Post />

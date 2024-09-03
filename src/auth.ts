@@ -26,6 +26,7 @@ export const {
             })
           }
         )
+
         if (!authResponse.ok) return null
 
         const user = await authResponse.json()

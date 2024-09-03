@@ -1,13 +1,19 @@
 'use client'
 
+import { signOut, useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
+
 export default function LogoutButton() {
-  const me = {
-    id: 'S2_realyuki',
-    nickname: '깽자',
-    image: '/realyuki.png'
+  const router = useRouter()
+  const { data: me } = useSession()
+
+  const onLogout = () => {
+    signOut({ redirect: false }).then(() => {
+      router.replace('/')
+    })
   }
 
-  const onLogout = () => {}
+  if (!me?.user) return null
 
   return (
     <button
@@ -17,16 +23,16 @@ export default function LogoutButton() {
       <div className="flex w-[100%] items-center gap-[12px]">
         <div>
           <img
-            src={me.image}
-            alt={me.id}
+            src={me?.user?.image as string}
+            alt={me?.user?.email as string}
             width={40}
             height={40}
             className="rounded-[100%]"
           />
         </div>
         <div className="flex flex-col items-start">
-          <span className="text-[15px]">{me.nickname}</span>
-          <span className="text-[15px] text-gray">@{me.id}</span>
+          <span className="text-[15px]">{me?.user?.name}</span>
+          <span className="text-[15px] text-gray">@{me?.user?.email}</span>
         </div>
       </div>
     </button>
