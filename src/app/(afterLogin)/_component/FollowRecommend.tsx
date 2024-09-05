@@ -1,13 +1,13 @@
 'use client'
 
-export default function FollowRecommend() {
-  const onFollow = () => {}
+import type { User } from '@/model/User'
 
-  const user = {
-    id: 'ghiblipicture',
-    nickname: 'Studio Ghibli Pictures',
-    image: '/follower.jpg'
-  }
+type Prop = {
+  user: User
+}
+
+export default function FollowRecommend({ user }: Prop) {
+  const onFollow = () => {}
 
   return (
     <div className="flex flex-row px-[16px] py-[12px]">

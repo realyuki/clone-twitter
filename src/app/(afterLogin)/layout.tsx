@@ -1,12 +1,12 @@
 import { auth } from '@/auth'
 import Image from 'next/image'
 import Link from 'next/link'
-import FollowRecommend from './_component/FollowRecommend'
+import FollowRecommendsSection from './_component/FollowRecommendsSection'
 import LogoutButton from './_component/LogoutButton'
 import NavMenu from './_component/NavMenu'
 import RQProvider from './_component/RQProvider'
 import RightSearchZone from './_component/RightSearchZone'
-import TrendSection from './_component/TrandSection'
+import TrendSection from './_component/TrendSection'
 
 type Props = { children: React.ReactNode; modal: React.ReactNode }
 
@@ -64,9 +64,7 @@ export default async function AfterLoginLayout({ children, modal }: Props) {
                     <h3 className="font-bold text-[20px]">Who to follow</h3>
                   </div>
                   <div>
-                    <FollowRecommend />
-                    <FollowRecommend />
-                    <FollowRecommend />
+                    <FollowRecommendsSection />
                   </div>
                 </div>
               </section>

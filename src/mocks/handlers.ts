@@ -153,5 +153,88 @@ export const handlers = [
         createdAt: generateDate()
       }
     ])
+  }),
+  http.get('api/posts/:postId', ({ request, params }) => {
+    const { postId } = params
+  }),
+  http.get('api/users/:userId', ({ request, params }) => {
+    const { userId } = params
+  }),
+  http.get('/api/users/:userId/posts', ({ request, params }) => {
+    const { userId } = params
+    return HttpResponse.json([
+      {
+        postId: 1,
+        User: User[0],
+        content: `${1} ${userId}의 게시글`,
+        Images: [{ imageId: 1, link: faker.image.urlLoremFlickr() }],
+        createdAt: generateDate()
+      },
+      {
+        postId: 2,
+        User: User[0],
+        content: `${2} ${userId}의 게시글`,
+        Images: [
+          { imageId: 1, link: faker.image.urlLoremFlickr() },
+          { imageId: 2, link: faker.image.urlLoremFlickr() }
+        ],
+        createdAt: generateDate()
+      },
+      {
+        postId: 3,
+        User: User[0],
+        content: `${3} ${userId}의 게시글`,
+        Images: [],
+        createdAt: generateDate()
+      }
+    ])
+  }),
+  http.get(
+    '/api/users/:userId/posts/:postId/comments',
+    ({ request, params }) => {
+      const { userId, postId } = params
+      return HttpResponse.json([
+        {
+          postId: 1,
+          User: User[0],
+          content: `${1} ${userId}의 게시글 ${postId}의 답글`,
+          Images: [{ imageId: 1, link: faker.image.urlLoremFlickr() }],
+          createdAt: generateDate()
+        },
+        {
+          postId: 2,
+          User: User[0],
+          content: `${2} ${userId}의 게시글 ${postId}의 답글`,
+          Images: [
+            { imageId: 1, link: faker.image.urlLoremFlickr() },
+            { imageId: 2, link: faker.image.urlLoremFlickr() }
+          ],
+          createdAt: generateDate()
+        },
+        {
+          postId: 3,
+          User: User[0],
+          content: `${3} ${userId}의 게시글 ${postId}의 답글`,
+          Images: [],
+          createdAt: generateDate()
+        }
+      ])
+    }
+  ),
+  http.get('/api/followRecommends', ({ request }) => {
+    return HttpResponse.json(User)
+  }),
+  http.get('/api/trends', ({ request }) => {
+    return HttpResponse.json([
+      { tagId: 1, title: '차은우', count: 1264 },
+      { tagId: 2, title: '도구리', count: 1264 },
+      { tagId: 3, title: '푸바오', count: 1264 },
+      { tagId: 4, title: '망그러진곰', count: 1264 },
+      { tagId: 5, title: '곽철이', count: 1264 },
+      { tagId: 6, title: '하니', count: 1264 },
+      { tagId: 7, title: '민지', count: 1264 },
+      { tagId: 8, title: '사쿠라', count: 1264 },
+      { tagId: 9, title: '랄랄', count: 1264 }
+    ])
   })
 ]
