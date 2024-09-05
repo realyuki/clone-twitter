@@ -6,6 +6,7 @@ import {
 import PostForm from './_component/PostForm'
 import PostRecommends from './_component/PostRecommends'
 import Tab from './_component/Tab'
+import TabDecider from './_component/TabDecider'
 import TabProvider from './_component/TabProvider'
 import { getPostRecommends } from './_lib/getPostRecommends'
 
@@ -23,7 +24,7 @@ export default async function Home() {
         <TabProvider>
           <Tab />
           <PostForm />
-          <PostRecommends />
+          <TabDecider />
         </TabProvider>
       </HydrationBoundary>
     </div>

@@ -1,6 +1,6 @@
 import BackButton from '../_component/BackButton'
-import Post from '../_component/Post'
 import SearchForm from '../_component/SearchForm'
+import SearchResult from './_component/SearchResult'
 import Tab from './_component/Tab'
 
 type SearchProps = {
@@ -38,17 +38,7 @@ export default function Search({ searchParams }: SearchProps) {
       </div>
       <Tab />
       <div>
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
+        <SearchResult searchParams={searchParams} />
       </div>
     </>
   )

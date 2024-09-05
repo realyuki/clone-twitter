@@ -1,8 +1,19 @@
+'use client'
+
+import { useRouter } from 'next/navigation'
+import type { FormEventHandler } from 'react'
+
 type Props = { q?: string }
 
 export default function SearchForm({ q }: Props) {
+  const router = useRouter()
+  const onSubmit: FormEventHandler<HTMLFormElement> = (event) => {
+    event.preventDefault()
+    router.push(`/search?q=${event.currentTarget.search.value}`)
+  }
+
   return (
-    <form>
+    <form onSubmit={onSubmit}>
       <div className="flex rounded-[9999px] bg-input-background">
         <svg
           width={16}
@@ -18,6 +29,7 @@ export default function SearchForm({ q }: Props) {
           type="search"
           className="h-[42px] grow-[1]"
           placeholder="Search"
+          name="search"
         />
       </div>
     </form>
