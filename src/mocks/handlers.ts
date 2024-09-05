@@ -154,11 +154,40 @@ export const handlers = [
       }
     ])
   }),
-  http.get('api/posts/:postId', ({ request, params }) => {
+  http.get('/api/posts/:postId', ({ request, params }) => {
     const { postId } = params
+    if (Number.parseInt(postId as string) > 10) {
+      return HttpResponse.json(
+        { message: 'no_such_post' },
+        {
+          status: 404
+        }
+      )
+    }
+    return HttpResponse.json({
+      postId,
+      User: User[0],
+      content: `${1} 게시글 아이디 ${postId}의 내용`,
+      Images: [
+        { imageId: 1, link: faker.image.urlLoremFlickr() },
+        { imageId: 2, link: faker.image.urlLoremFlickr() },
+        { imageId: 3, link: faker.image.urlLoremFlickr() }
+      ],
+      createdAt: generateDate()
+    })
   }),
-  http.get('api/users/:userId', ({ request, params }) => {
+  http.get('/api/users/:userId', ({ request, params }) => {
     const { userId } = params
+    const found = User.find((v) => v.id === userId)
+    if (found) {
+      return HttpResponse.json(found)
+    }
+    return HttpResponse.json(
+      { message: 'no_such_user' },
+      {
+        status: 404
+      }
+    )
   }),
   http.get('/api/users/:userId/posts', ({ request, params }) => {
     const { userId } = params

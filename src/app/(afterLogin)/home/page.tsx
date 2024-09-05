@@ -4,7 +4,6 @@ import {
   dehydrate
 } from '@tanstack/react-query'
 import PostForm from './_component/PostForm'
-import PostRecommends from './_component/PostRecommends'
 import Tab from './_component/Tab'
 import TabDecider from './_component/TabDecider'
 import TabProvider from './_component/TabProvider'
