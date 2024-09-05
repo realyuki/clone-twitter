@@ -1,37 +1,39 @@
-import CommentForm from '@/app/(afterLogin)/[username]/status/[id]/_component/CommentForm'
-import BackButton from '@/app/(afterLogin)/_component/BackButton'
-import Post from '@/app/(afterLogin)/_component/Post'
+import { getComments } from '@/app/(afterLogin)/[username]/_lib/getComments'
+import { getSinglePost } from '@/app/(afterLogin)/[username]/status/[id]/_lib/getSinglePost'
 import { faker } from '@faker-js/faker'
+import {
+  HydrationBoundary,
+  QueryClient,
+  dehydrate
+} from '@tanstack/react-query'
 import CloseButton from './_component/CloseButton'
+import ImageZone from './_component/ImageZone'
 
-export default function Default() {
-  const photo = {
-    imageId: 1,
-    link: faker.image.urlLoremFlickr(),
-    Post: {
-      content: faker.lorem.text()
-    }
+type Props = {
+  params: {
+    id: string
   }
+}
+
+export default async function Default({ params }: Props) {
+  const { id } = params
+  const queryClient = new QueryClient()
+  await queryClient.prefetchQuery({
+    queryKey: ['posts', id],
+    queryFn: getSinglePost
+  })
+  await queryClient.prefetchQuery({
+    queryKey: ['posts', id, 'comments'],
+    queryFn: getComments
+  })
+  const dehydrated = dehydrate(queryClient)
 
   return (
     <div className="fixed inset-0 bg-black">
-      <CloseButton />
-      <div className="flex grow-[1] flex-row justify-between">
-        <div className="flex h-[100vh] grow-[1] justify-center">
-          <img src={photo.link} alt={photo.Post?.content} />
-        </div>
-        <div className="w-[350px] border-border border-l border-solid">
-          <Post noImage />
-          <CommentForm />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-        </div>
-      </div>
+      <HydrationBoundary state={dehydrated}>
+        <CloseButton />
+        <ImageZone id={id} />
+      </HydrationBoundary>
     </div>
   )
 }

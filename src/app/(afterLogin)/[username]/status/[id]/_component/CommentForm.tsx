@@ -1,8 +1,13 @@
 'use client'
 
+import { QueryClient } from '@tanstack/react-query'
 import { useRef, useState } from 'react'
 
-export default function CommentForm() {
+type Props = {
+  id: string
+}
+
+export default function CommentForm({ id }: Props) {
   const [content, setContent] = useState('')
   const imageRef = useRef<HTMLInputElement>(null)
 
@@ -14,6 +19,11 @@ export default function CommentForm() {
     id: 'realyuki',
     image: '/realyuki.png'
   }
+
+  const queryClient = new QueryClient()
+  const post = queryClient.getQueryData(['posts', id])
+
+  if (!post) return null
 
   return (
     <form

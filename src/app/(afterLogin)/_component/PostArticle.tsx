@@ -11,7 +11,7 @@ type Props = {
     content: string
     User: User
     createdAt: Date
-    images: PostImage[]
+    Images: PostImage[]
   }
 }
 
