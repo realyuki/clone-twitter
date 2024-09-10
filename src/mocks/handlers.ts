@@ -7,6 +7,11 @@ const User = [
   { id: 'leoturtle', nickname: '레오', image: faker.image.avatar() }
 ]
 
+const delay = (ms: number) =>
+  new Promise((res) => {
+    setTimeout(res, ms)
+  })
+
 function generateDate() {
   const lastWeek = new Date(Date.now())
 
@@ -44,6 +49,7 @@ export const handlers = [
     })
   }),
   http.get('/api/postRecommends', async ({ request }) => {
+    await delay(1000)
     const url = new URL(request.url)
     const cursor =
       Number.parseInt(url.searchParams.get('cursor') as string) || 0
@@ -97,7 +103,8 @@ export const handlers = [
       }
     ])
   }),
-  http.get('/api/followingPosts', ({ request }) => {
+  http.get('/api/followingPosts', async ({ request }) => {
+    await delay(1000)
     return HttpResponse.json([
       {
         postId: 1,

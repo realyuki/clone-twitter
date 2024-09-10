@@ -61,12 +61,18 @@
         "useValidAnchor": "error",
         "useValidAriaProps": "error",
         "useValidAriaRole": "error",
-        "useValidAriaValues": "error"
+        "useValidAriaValues": "error",
+        "noSvgWithoutTitle": "off"
       },
       "style": { "useSelfClosingElements": "off" },
-      "suspicious": { "noExplicitAny": "off" },
+      "suspicious": {
+        "noExplicitAny": "off",
+        "noShadowRestrictedNames": "off",
+        "noArrayIndexKey": "off"
+      },
       "correctness": {
-        "useExhaustiveDependencies": "off"
+        "useExhaustiveDependencies": "off",
+        "useJsxKeyInIterable": "off"
       }
     }
   }

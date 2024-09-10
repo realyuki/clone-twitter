@@ -1,7 +1,10 @@
 'use client'
 
 import type { Post as IPost } from '@/model/Post'
-import { type InfiniteData, useInfiniteQuery } from '@tanstack/react-query'
+import {
+  type InfiniteData,
+  useSuspenseInfiniteQuery
+} from '@tanstack/react-query'
 import { Fragment, useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
 import Post from '../../_component/Post'
@@ -9,7 +12,7 @@ import { getPostRecommends } from '../_lib/getPostRecommends'
 
 export default function PostRecommends() {
   const { data, fetchNextPage, hasNextPage, isFetching, isPending, isError } =
-    useInfiniteQuery<
+    useSuspenseInfiniteQuery<
       IPost[],
       Record<string, any>,
       InfiniteData<IPost[]>,
@@ -35,11 +38,39 @@ export default function PostRecommends() {
     }
   }, [inView, isFetching, hasNextPage, fetchNextPage])
 
-  if (isError) return null
+  if (isPending) {
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <svg height="100%" viewBox="0 0 32 32" width={40}>
+          <circle
+            cx="16"
+            cy="16"
+            fill="none"
+            r="14"
+            strokeWidth="4"
+            style={{ stroke: 'rgb(29, 155, 240)', opacity: 0.2 }}
+          ></circle>
+          <circle
+            cx="16"
+            cy="16"
+            fill="none"
+            r="14"
+            strokeWidth="4"
+            style={{
+              stroke: 'rgb(29, 155, 240)',
+              strokeDasharray: 80,
+              strokeDashoffset: 60
+            }}
+          ></circle>
+        </svg>
+      </div>
+    )
+  }
+
+  if (isError) return 'error 처리'
 
   return data?.pages.map((page, i) => (
     <>
-      {/* biome-ignore lint/suspicious/noArrayIndexKey: <explanation> */}
       <Fragment key={i}>
         {page.map((post) => (
           <Post key={post.postId} post={post} />
