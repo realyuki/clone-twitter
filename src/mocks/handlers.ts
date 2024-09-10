@@ -43,7 +43,7 @@ export const handlers = [
       }
     })
   }),
-  http.get('/api/postRecommends', ({ request }) => {
+  http.get('/api/postRecommends', async ({ request }) => {
     const url = new URL(request.url)
     const cursor =
       Number.parseInt(url.searchParams.get('cursor') as string) || 0
