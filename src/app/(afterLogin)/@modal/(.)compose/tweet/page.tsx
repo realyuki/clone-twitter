@@ -3,11 +3,13 @@
 import PostForm from '@/app/(afterLogin)/home/_component/PostForm'
 import { useRouter } from 'next/navigation'
 import { useRef, useState } from 'react'
+import { useSession } from 'next-auth/react'
 
 export default function TweetModal() {
   const [content, setContent] = useState()
   const imageRef = useRef<HTMLInputElement>(null)
   const router = useRouter()
+  const { data: me } = useSession()
 
   const onSubmit = () => {}
   const onClickClose = () => {
@@ -15,11 +17,6 @@ export default function TweetModal() {
   }
   const onClickButton = () => {}
   const onChangeContent = () => {}
-
-  const me = {
-    id: 'realyuki',
-    image: '/realyuki.png'
-  }
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-dimmed">

@@ -1,6 +1,7 @@
 'use client'
 
-import { QueryClient } from '@tanstack/react-query'
+import { useQueryClient } from '@tanstack/react-query'
+import { useSession } from 'next-auth/react'
 import { useRef, useState } from 'react'
 
 type Props = {
@@ -10,17 +11,13 @@ type Props = {
 export default function CommentForm({ id }: Props) {
   const [content, setContent] = useState('')
   const imageRef = useRef<HTMLInputElement>(null)
+  const { data: me } = useSession()
 
   const onClickButton = () => {}
   const onSubmit = () => {}
   const onChange = () => {}
 
-  const me = {
-    id: 'realyuki',
-    image: '/realyuki.png'
-  }
-
-  const queryClient = new QueryClient()
+  const queryClient = useQueryClient()
   const post = queryClient.getQueryData(['posts', id])
 
   if (!post) return null
@@ -34,8 +31,8 @@ export default function CommentForm({ id }: Props) {
         <div>
           <img
             width={40}
-            src={me.image}
-            alt={me.id}
+            src={me?.user?.image as string}
+            alt={me?.user?.id}
             className="mr-[8px] rounded-[100%]"
           />
         </div>

@@ -1,13 +1,12 @@
 'use client'
 
+import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { useSelectedLayoutSegment } from 'next/navigation'
 
 export default function NavMenu() {
   const segment = useSelectedLayoutSegment()
-  const me = {
-    id: 'realyuki'
-  }
+  const { data: me } = useSession()
 
   return (
     <>
@@ -119,13 +118,13 @@ export default function NavMenu() {
           )}
         </Link>
       </li>
-      {me?.id && (
+      {me?.user?.email && (
         <li>
           <Link
-            href={`/${me?.id}`}
+            href={`/${me?.user.email}`}
             className="flex h-[58px] flex-row items-center gap-[20px]"
           >
-            {segment === me.id ? (
+            {segment === me.user.email ? (
               <>
                 <svg
                   width={26}

@@ -1,14 +1,12 @@
 'use client'
 
+import { useSession } from 'next-auth/react'
 import { type ChangeEventHandler, useRef, useState } from 'react'
 
 export default function PostForm() {
   const imageRef = useRef<HTMLInputElement>(null)
   const [content, setContent] = useState('')
-  const me = {
-    id: 'realyuki',
-    image: '/realyuki.png'
-  }
+  const { data: me } = useSession()
 
   const onChange: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
     setContent(e.target.value)
@@ -23,8 +21,8 @@ export default function PostForm() {
       <div className="flex w-[100%] border-border border-b px-[16px] py-[12px]">
         <div>
           <img
-            src={me.image}
-            alt={me.id}
+            src={me?.user?.image as string}
+            alt={me?.user?.id}
             width={40}
             height={40}
             className="mr-[8px] rounded-[100%]"
