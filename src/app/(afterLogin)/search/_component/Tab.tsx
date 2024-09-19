@@ -20,28 +20,16 @@ export default function Tab() {
 
   return (
     <div className="flex flex-row border-border border-b border-solid">
-      <div
-        onClick={onClickHot}
-        className="flex grow-[1] cursor-pointer justify-center text-[15px]"
-      >
+      <div onClick={onClickHot} className="flex grow-[1] cursor-pointer justify-center text-[15px]">
         <div className="relative flex h-[53px] items-center">
           Hot
-          <div
-            hidden={current === 'latest'}
-            className="absolute bottom-0 h-[3px] w-[100%] bg-blue"
-          ></div>
+          <div hidden={current === 'latest'} className="absolute bottom-0 h-[3px] w-[100%] bg-blue"></div>
         </div>
       </div>
-      <div
-        onClick={onClickRecent}
-        className="flex grow-[1] cursor-pointer justify-center text-[15px]"
-      >
+      <div onClick={onClickRecent} className="flex grow-[1] cursor-pointer justify-center text-[15px]">
         <div className="relative flex h-[53px] items-center">
           Latest
-          <div
-            hidden={current === 'hot'}
-            className="absolute bottom-0 h-[3px] w-[100%] bg-blue"
-          ></div>
+          <div hidden={current === 'hot'} className="absolute bottom-0 h-[3px] w-[100%] bg-blue"></div>
         </div>
       </div>
     </div>

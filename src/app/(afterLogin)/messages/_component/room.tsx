@@ -27,13 +27,7 @@ export default function Room() {
   return (
     <div onClickCapture={onClick} className="flex px-[16px] py-[12px]">
       <div className="mr-[16px]">
-        <img
-          width={40}
-          height={40}
-          src={faker.image.avatar()}
-          alt=""
-          className="rounded-[100%]"
-        />
+        <img width={40} height={40} src={faker.image.avatar()} alt="" className="rounded-[100%]" />
       </div>
       <div className="flex flex-col">
         <div>
@@ -41,13 +35,9 @@ export default function Room() {
             <b>{user.nickname}</b>
           </span>
           <span className="text-[15px] text-gray">@{user.id}</span>
-          <span className="text-[15px] text-gray">
-            {dayjs(user.Messages?.at(-1)?.createdAt).fromNow(true)}
-          </span>
+          <span className="text-[15px] text-gray">{dayjs(user.Messages?.at(-1)?.createdAt).fromNow(true)}</span>
         </div>
-        <div className="text-[15px] text-gray">
-          {user.Messages?.at(-1)?.content}
-        </div>
+        <div className="text-[15px] text-gray">{user.Messages?.at(-1)?.content}</div>
       </div>
     </div>
   )

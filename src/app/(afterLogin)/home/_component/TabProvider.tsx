@@ -10,9 +10,5 @@ export const TabContext = createContext({
 export default function TabProvider({ children }: PropsWithChildren) {
   const [tab, setTab] = useState('rec')
 
-  return (
-    <TabContext.Provider value={{ tab, setTab }}>
-      {children}
-    </TabContext.Provider>
-  )
+  return <TabContext.Provider value={{ tab, setTab }}>{children}</TabContext.Provider>
 }

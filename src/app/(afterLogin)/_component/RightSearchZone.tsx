@@ -37,24 +37,13 @@ export default function RightSearchZone() {
             <label htmlFor="anyone" className="text-[15px]">
               From anyone
             </label>
-            <input
-              type="radio"
-              name="pf"
-              id="anyone"
-              defaultChecked
-              onChange={onChangeAll}
-            />
+            <input type="radio" name="pf" id="anyone" defaultChecked onChange={onChangeAll} />
           </div>
           <div className="flex justify-between py-[4px]">
             <label htmlFor="follower" className="text-[15px]">
               People you follow
             </label>
-            <input
-              type="radio"
-              name="pf"
-              id="follower"
-              onChange={onChangeFollow}
-            />
+            <input type="radio" name="pf" id="follower" onChange={onChangeFollow} />
           </div>
         </div>
       </>

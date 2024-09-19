@@ -13,12 +13,8 @@ export default function Comments({ id }: Prop) {
   const queryClient = useQueryClient()
   const post = queryClient.getQueryData(['posts', id])
 
-  const { data } = useQuery<
-    IPost[],
-    Record<string, any>,
-    IPost[],
-    [_1: string, _2: string, _3: string]
-  >({
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { data } = useQuery<IPost[], Record<string, any>, IPost[], [_1: string, _2: string, _3: string]>({
     queryKey: ['posts', id, 'comments'],
     queryFn: getComments,
     staleTime: 60 * 1000,

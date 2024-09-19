@@ -18,10 +18,7 @@ export default function FollowRecommend({ user }: Prop) {
         <span className="text-[15px]">{user.nickname}</span>
         <span className="text-[15px] text-gray">@{user.id}</span>
       </div>
-      <button
-        onClick={onFollow}
-        className="button h-[32px] min-h-[32px] w-[auto] bg-white text-[#0f1419] text-[14px]"
-      >
+      <button onClick={onFollow} className="button h-[32px] min-h-[32px] w-[auto] bg-white text-[#0f1419] text-[14px]">
         <span className="leading-none">Follow</span>
       </button>
     </div>

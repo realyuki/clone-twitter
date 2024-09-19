@@ -10,12 +10,8 @@ type Prop = {
 }
 
 export default function UserPosts({ username }: Prop) {
-  const { data } = useQuery<
-    IPost[],
-    Record<string, any>,
-    IPost[],
-    [_1: string, _2: string, string]
-  >({
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { data } = useQuery<IPost[], Record<string, any>, IPost[], [_1: string, _2: string, string]>({
     queryKey: ['posts', 'users', username],
     queryFn: getUserPosts,
     staleTime: 60 * 1000,

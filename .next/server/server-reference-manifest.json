@@ -1,0 +1,22 @@
+{
+  "node": {
+    "2cb0b678c7c4f235ec0e092dfa5dfb31e4209720": {
+      "workers": {
+        "app/(beforeLogin)/@modal/(.)i/flow/signup/page": "(action-browser)/./.yarn/__virtual__/next-virtual-3e18d5fb21/5/.yarn/berry/cache/next-npm-14.2.2-99b4c99f66-10c0.zip/node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Frealyuki%2FDocuments%2FWORKSPACE%2Frealyuki%2Fclone-twitter%2Fsrc%2Fapp%2F(beforeLogin)%2F_lib%2Fsignup.ts%22%2C%5B%22default%22%2C%22%24%24ACTION_1%22%5D%5D%5D&__client_imported__=true!"
+      },
+      "layer": {
+        "app/(beforeLogin)/@modal/(.)i/flow/signup/page": "action-browser"
+      }
+    },
+    "3c240b6d4483260c1b5e12543206ee39714a74d2": {
+      "workers": {
+        "app/(beforeLogin)/@modal/(.)i/flow/signup/page": "(action-browser)/./.yarn/__virtual__/next-virtual-3e18d5fb21/5/.yarn/berry/cache/next-npm-14.2.2-99b4c99f66-10c0.zip/node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Frealyuki%2FDocuments%2FWORKSPACE%2Frealyuki%2Fclone-twitter%2Fsrc%2Fapp%2F(beforeLogin)%2F_lib%2Fsignup.ts%22%2C%5B%22default%22%2C%22%24%24ACTION_1%22%5D%5D%5D&__client_imported__=true!"
+      },
+      "layer": {
+        "app/(beforeLogin)/@modal/(.)i/flow/signup/page": "action-browser"
+      }
+    }
+  },
+  "edge": {},
+  "encryptionKey": "V6evAe5203FewYMFzVdPMKeUMLwLE9azTMC1zUUyjGQ="
+}

@@ -1,5 +1,6 @@
 import type { User } from '@/model/User'
 import Link from 'next/link'
+import Image from 'next/image'
 
 type PostImagesProps = {
   post: {
@@ -7,6 +8,7 @@ type PostImagesProps = {
     content: string
     User: User
     createdAt: Date
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     Images: any[]
   }
 }
@@ -24,7 +26,7 @@ export default function PostImages({ post }: PostImagesProps) {
           backgroundSize: 'contain'
         }}
       >
-        <img src={post.Images[0]?.link} alt="" />
+        <Image src={post.Images[0]?.link} alt="" />
       </Link>
     )
   }

@@ -10,12 +10,8 @@ type Props = {
 }
 
 export default function SearchResult({ searchParams }: Props) {
-  const { data } = useQuery<
-    IPost[],
-    Record<string, any>,
-    IPost[],
-    [_1: string, _2: string, Props['searchParams']]
-  >({
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { data } = useQuery<IPost[], Record<string, any>, IPost[], [_1: string, _2: string, Props['searchParams']]>({
     queryKey: ['posts', 'search', searchParams],
     queryFn: getSearchResult,
     staleTime: 60 * 1000,

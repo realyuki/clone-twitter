@@ -4,18 +4,15 @@ import BackButton from '@/app/(afterLogin)/_component/BackButton'
 import type { User } from '@/model/User'
 import { useQuery } from '@tanstack/react-query'
 import { getUser } from '../_lib/getUser'
+import Image from 'next/image'
 
 type Props = {
   username: string
 }
 
 export default function UserInfo({ username }: Props) {
-  const { data: user, error } = useQuery<
-    User,
-    Record<string, any>,
-    User,
-    [_1: string, _2: string]
-  >({
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { data: user, error } = useQuery<User, Record<string, any>, User, [_1: string, _2: string]>({
     queryKey: ['users', username],
     queryFn: getUser,
     staleTime: 60 * 1000,
@@ -44,11 +41,7 @@ export default function UserInfo({ username }: Props) {
       <div className="relative">
         <div>{/* <img src={user.bannerImage} alt="" /> */}</div>
         <div className="absolute left-16 mt-[-67px] w-[145px]">
-          <img
-            src={user.image}
-            alt={username}
-            className="rounded-16 border-4 border-black border-solid"
-          />
+          <Image src={user.image} alt={username} className="rounded-16 border-4 border-black border-solid" />
         </div>
       </div>
       <div className="flex flex-col">

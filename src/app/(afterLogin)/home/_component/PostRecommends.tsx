@@ -1,31 +1,28 @@
 'use client'
 
 import type { Post as IPost } from '@/model/Post'
-import {
-  type InfiniteData,
-  useSuspenseInfiniteQuery
-} from '@tanstack/react-query'
+import { type InfiniteData, useSuspenseInfiniteQuery } from '@tanstack/react-query'
 import { Fragment, useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
 import Post from '../../_component/Post'
 import { getPostRecommends } from '../_lib/getPostRecommends'
 
 export default function PostRecommends() {
-  const { data, fetchNextPage, hasNextPage, isFetching, isPending, isError } =
-    useSuspenseInfiniteQuery<
-      IPost[],
-      Record<string, any>,
-      InfiniteData<IPost[]>,
-      [_1: string, _2: string],
-      number
-    >({
-      queryKey: ['posts', 'recommends'],
-      queryFn: getPostRecommends,
-      initialPageParam: 0,
-      getNextPageParam: (lastPage) => lastPage.at(-1)?.postId,
-      staleTime: 60 * 1000,
-      gcTime: 300 * 1000 //gcTime은 staleTime보다 무조건 커야 한다.
-    })
+  const { data, fetchNextPage, hasNextPage, isFetching, isPending, isError } = useSuspenseInfiniteQuery<
+    IPost[],
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    Record<string, any>,
+    InfiniteData<IPost[]>,
+    [_1: string, _2: string],
+    number
+  >({
+    queryKey: ['posts', 'recommends'],
+    queryFn: getPostRecommends,
+    initialPageParam: 0,
+    getNextPageParam: (lastPage) => lastPage.at(-1)?.postId,
+    staleTime: 60 * 1000,
+    gcTime: 300 * 1000 //gcTime은 staleTime보다 무조건 커야 한다.
+  })
 
   const { ref, inView } = useInView({
     threshold: 0,
@@ -33,8 +30,8 @@ export default function PostRecommends() {
   })
 
   useEffect(() => {
-    if (inView) {
-      !isFetching && hasNextPage && fetchNextPage()
+    if (inView && !isFetching && hasNextPage) {
+      fetchNextPage()
     }
   }, [inView, isFetching, hasNextPage, fetchNextPage])
 

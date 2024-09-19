@@ -11,12 +11,8 @@ type Prop = {
 }
 
 export default function SinglePost({ id, noImage }: Prop) {
-  const { data: post, error } = useQuery<
-    IPost,
-    Record<string, any>,
-    IPost,
-    [_1: string, _2: string]
-  >({
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { data: post, error } = useQuery<IPost, Record<string, any>, IPost, [_1: string, _2: string]>({
     queryKey: ['posts', id],
     queryFn: getSinglePost,
     staleTime: 60 * 1000,

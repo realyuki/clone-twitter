@@ -1,10 +1,6 @@
 import BackButton from '@/app/(afterLogin)/_component/BackButton'
 import Post from '@/app/(afterLogin)/_component/Post'
-import {
-  HydrationBoundary,
-  QueryClient,
-  dehydrate
-} from '@tanstack/react-query'
+import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query'
 import { getComments } from '../../_lib/getComments'
 import CommentForm from './_component/CommentForm'
 import Comments from './_component/Comments'

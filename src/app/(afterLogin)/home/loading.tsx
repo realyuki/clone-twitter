@@ -1,12 +1,7 @@
 export default function Loading() {
   return (
     <div className="flex justify-center">
-      <svg
-        className="animate-spin"
-        height="100%"
-        viewBox="0 0 32 32"
-        width={40}
-      >
+      <svg className="animate-spin" height="100%" viewBox="0 0 32 32" width={40}>
         <circle
           cx="16"
           cy="16"

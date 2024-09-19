@@ -1,26 +1,13 @@
 import type { Config } from 'tailwindcss'
 
-const px0_10 = Object.fromEntries(
-  Array.from({ length: 11 }, (_, i) => [i, `${i}px`])
-)
-const px0_100 = Object.fromEntries(
-  Array.from({ length: 101 }, (_, i) => [i, `${i}px`])
-)
-const px0_200 = Object.fromEntries(
-  Array.from({ length: 201 }, (_, i) => [i, `${i}px`])
-)
-const px0_1000 = Object.fromEntries(
-  Array.from({ length: 1001 }, (_, i) => [i, `${i}px`])
-)
+const px0_10 = Object.fromEntries(Array.from({ length: 11 }, (_, i) => [i, `${i}px`]))
+const px0_100 = Object.fromEntries(Array.from({ length: 101 }, (_, i) => [i, `${i}px`]))
+const px0_200 = Object.fromEntries(Array.from({ length: 201 }, (_, i) => [i, `${i}px`]))
+const px0_1000 = Object.fromEntries(Array.from({ length: 1001 }, (_, i) => [i, `${i}px`]))
 
 const config = {
   darkMode: ['class'],
-  content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}'
-  ],
+  content: ['./pages/**/*.{ts,tsx}', './components/**/*.{ts,tsx}', './app/**/*.{ts,tsx}', './src/**/*.{ts,tsx}'],
   prefix: '',
   // corePlugins: {
   //   preflight: false

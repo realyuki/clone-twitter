@@ -47,10 +47,7 @@ export default function ChatRoom() {
           <h3 className="ml-[30px] font-bold text-[20px]">{user.nickname}</h3>
         </div>
       </div>
-      <Link
-        href={user.nickname}
-        className="flex flex-col items-center bg-gray px-[20px] py-[16px]"
-      >
+      <Link href={user.nickname} className="flex flex-col items-center bg-gray px-[20px] py-[16px]">
         <img width={64} src={user.image} alt={user.id} />
         <div className="mt-[4px]">
           <b>{user.nickname}</b>

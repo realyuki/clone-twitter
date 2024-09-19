@@ -8,7 +8,10 @@ import RQProvider from './_component/RQProvider'
 import RightSearchZone from './_component/RightSearchZone'
 import TrendSection from './_component/TrendSection'
 
-type Props = { children: React.ReactNode; modal: React.ReactNode }
+interface Props {
+  children: React.ReactNode
+  modal: React.ReactNode
+}
 
 export default async function AfterLoginLayout({ children, modal }: Props) {
   const session = await auth()
@@ -21,12 +24,7 @@ export default async function AfterLoginLayout({ children, modal }: Props) {
             <section className="px-[8px]">
               <div className="w-[275px]">
                 <Link href={`${session?.user ? 'home' : '/'}`}>
-                  <Image
-                    src="/yRsRRjGO.jpg"
-                    alt="x.com"
-                    width={40}
-                    height={40}
-                  />
+                  <Image src="/yRsRRjGO.jpg" alt="x.com" width={40} height={40} />
                 </Link>
                 {session?.user && (
                   <>
@@ -35,10 +33,7 @@ export default async function AfterLoginLayout({ children, modal }: Props) {
                         <NavMenu />
                       </ul>
                       <div className="w-[90%]">
-                        <Link
-                          href="/compose/tweet"
-                          className="button w-[100%] bg-blue text-white"
-                        >
+                        <Link href="/compose/tweet" className="button w-[100%] bg-blue text-white">
                           <span>Post</span>
                         </Link>
                       </div>
@@ -52,9 +47,7 @@ export default async function AfterLoginLayout({ children, modal }: Props) {
           <div className="flex grow-[1]">
             <div className="flex w-[1050px] flex-row justify-between">
               <main className="flex w-[100%] max-w-[600px] shrink-[1] items-start border-border border-x">
-                <div className="flex w-[100%] grow-[1] flex-col">
-                  {children}
-                </div>
+                <div className="flex w-[100%] grow-[1] flex-col">{children}</div>
               </main>
               <section className="mr-[70px] flex w-[350px] flex-col gap-[12px] py-[12px]">
                 <RightSearchZone />

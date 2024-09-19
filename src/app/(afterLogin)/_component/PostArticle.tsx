@@ -22,10 +22,7 @@ export default function PostArticle({ children, post }: Props) {
   }
 
   return (
-    <article
-      onClickCapture={onClick}
-      className="border-border border-b border-solid px-[16px] py-[12px]"
-    >
+    <article onClickCapture={onClick} className="border-border border-b border-solid px-[16px] py-[12px]">
       {children}
     </article>
   )

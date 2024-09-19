@@ -29,50 +29,19 @@ export default function SignupModal() {
           <BackButton />
           <div className="my-20 font-bold text-lg">Create your account</div>
           <div className="my-12">
-            <input
-              type="text"
-              className="input"
-              id="id"
-              placeholder="id"
-              name="id"
-              required
-            />
+            <input type="text" className="input" id="id" placeholder="id" name="id" required />
           </div>
           <div className="my-12">
-            <input
-              type="text"
-              className="input"
-              id="name"
-              placeholder="name"
-              name="name"
-              required
-            />
+            <input type="text" className="input" id="name" placeholder="name" name="name" required />
           </div>
           <div className="my-12">
-            <input
-              type="password"
-              className="input"
-              id="password"
-              placeholder="password"
-              name="password"
-              required
-            />
+            <input type="password" className="input" id="password" placeholder="password" name="password" required />
           </div>
           <div className="my-12">
-            <input
-              type="file"
-              className="input"
-              id="image"
-              placeholder="image"
-              name="image"
-              required
-            />
+            <input type="file" className="input" id="image" placeholder="image" name="image" required />
           </div>
           <div>
-            <button
-              className="button h-[50px] w-[100%] max-w-[100%] bg-white text-[#051419]"
-              type="submit"
-            >
+            <button className="button h-[50px] w-[100%] max-w-[100%] bg-white text-[#051419]" type="submit">
               Next
             </button>
             <p className="text-[red]">{showMessage(state?.message)}</p>

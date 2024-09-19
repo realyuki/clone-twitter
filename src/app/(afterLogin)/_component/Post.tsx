@@ -33,20 +33,14 @@ export default function Post({ noImage, post }: PostType) {
         <div className="grow-[1]">
           <div className="mb-[2px] flex items-center gap-[4px]">
             <Link href={`/${target?.User?.id}`}>
-              <span className="mr-[4px] font-bold text-[15px]">
-                {target?.User.nickname}
-              </span>
+              <span className="mr-[4px] font-bold text-[15px]">{target?.User.nickname}</span>
               <span className="text-[15px] text-gray">@{target?.User.id}</span>
             </Link>
             <span className="text-[15px] text-gray">·</span>
-            <span className="text-[15px] text-gray">
-              {dayjs(target?.createdAt).fromNow(true)}
-            </span>
+            <span className="text-[15px] text-gray">{dayjs(target?.createdAt).fromNow(true)}</span>
           </div>
           <div>{target?.content}</div>
-          <div className="mt-[12px] overflow-hidden rounded-[16px]">
-            {!noImage && <PostImages post={target} />}
-          </div>
+          <div className="mt-[12px] overflow-hidden rounded-[16px]">{!noImage && <PostImages post={target} />}</div>
           <div>Action button</div>
         </div>
       </div>

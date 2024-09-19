@@ -1,8 +1,4 @@
-import {
-  HydrationBoundary,
-  QueryClient,
-  dehydrate
-} from '@tanstack/react-query'
+import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query'
 import { getPostRecommends } from '../_lib/getPostRecommends'
 import TabDecider from './TabDecider'
 
