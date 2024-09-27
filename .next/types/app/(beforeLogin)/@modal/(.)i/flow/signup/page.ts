@@ -5,24 +5,36 @@ import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadat
 type TEntry = typeof import('../../../../../../../../src/app/(beforeLogin)/@modal/(.)i/flow/signup/page.js')
 
 // Check that the entry is a valid entry
-checkFields<Diff<{
-  default: Function
-  config?: {}
-  generateStaticParams?: Function
-  revalidate?: RevalidateRange<TEntry> | false
-  dynamic?: 'auto' | 'force-dynamic' | 'error' | 'force-static'
-  dynamicParams?: boolean
-  fetchCache?: 'auto' | 'force-no-store' | 'only-no-store' | 'default-no-store' | 'default-cache' | 'only-cache' | 'force-cache'
-  preferredRegion?: 'auto' | 'global' | 'home' | string | string[]
-  runtime?: 'nodejs' | 'experimental-edge' | 'edge'
-  maxDuration?: number
-  
-  metadata?: any
-  generateMetadata?: Function
-  viewport?: any
-  generateViewport?: Function
-  
-}, TEntry, ''>>()
+checkFields<
+  Diff<
+    {
+      default: Function
+      config?: {}
+      generateStaticParams?: Function
+      revalidate?: RevalidateRange<TEntry> | false
+      dynamic?: 'auto' | 'force-dynamic' | 'error' | 'force-static'
+      dynamicParams?: boolean
+      fetchCache?:
+        | 'auto'
+        | 'force-no-store'
+        | 'only-no-store'
+        | 'default-no-store'
+        | 'default-cache'
+        | 'only-cache'
+        | 'force-cache'
+      preferredRegion?: 'auto' | 'global' | 'home' | string | string[]
+      runtime?: 'nodejs' | 'experimental-edge' | 'edge'
+      maxDuration?: number
+
+      metadata?: any
+      generateMetadata?: Function
+      viewport?: any
+      generateViewport?: Function
+    },
+    TEntry,
+    ''
+  >
+>()
 
 // Check the prop type of the entry function
 checkFields<Diff<PageProps, FirstArg<TEntry['default']>, 'default'>>()
@@ -41,8 +53,15 @@ if ('generateViewport' in entry) {
 
 // Check the arguments and return type of the generateStaticParams function
 if ('generateStaticParams' in entry) {
-  checkFields<Diff<{ params: PageParams }, FirstArg<MaybeField<TEntry, 'generateStaticParams'>>, 'generateStaticParams'>>()
-  checkFields<Diff<{ __tag__: 'generateStaticParams', __return_type__: any[] | Promise<any[]> }, { __tag__: 'generateStaticParams', __return_type__: ReturnType<MaybeField<TEntry, 'generateStaticParams'>> }>>()
+  checkFields<
+    Diff<{ params: PageParams }, FirstArg<MaybeField<TEntry, 'generateStaticParams'>>, 'generateStaticParams'>
+  >()
+  checkFields<
+    Diff<
+      { __tag__: 'generateStaticParams'; __return_type__: any[] | Promise<any[]> },
+      { __tag__: 'generateStaticParams'; __return_type__: ReturnType<MaybeField<TEntry, 'generateStaticParams'>> }
+    >
+  >()
 }
 
 type PageParams = any
@@ -62,13 +81,13 @@ type RevalidateRange<T> = T extends { revalidate: any } ? NonNegative<T['revalid
 
 // If T is unknown or any, it will be an empty {} type. Otherwise, it will be the same as Omit<T, keyof Base>.
 type OmitWithTag<T, K extends keyof any, _M> = Omit<T, K>
-type Diff<Base, T extends Base, Message extends string = ''> = 0 extends (1 & T) ? {} : OmitWithTag<T, keyof Base, Message>
+type Diff<Base, T extends Base, Message extends string = ''> = 0 extends 1 & T
+  ? {}
+  : OmitWithTag<T, keyof Base, Message>
 
-type FirstArg<T extends Function> = T extends (...args: [infer T, any]) => any ? unknown extends T ? any : T : never
-type SecondArg<T extends Function> = T extends (...args: [any, infer T]) => any ? unknown extends T ? any : T : never
-type MaybeField<T, K extends string> = T extends { [k in K]: infer G } ? G extends Function ? G : never : never
-
-
+type FirstArg<T extends Function> = T extends (...args: [infer T, any]) => any ? (unknown extends T ? any : T) : never
+type SecondArg<T extends Function> = T extends (...args: [any, infer T]) => any ? (unknown extends T ? any : T) : never
+type MaybeField<T, K extends string> = T extends { [k in K]: infer G } ? (G extends Function ? G : never) : never
 
 function checkFields<_ extends { [k in keyof any]: never }>() {}
 
