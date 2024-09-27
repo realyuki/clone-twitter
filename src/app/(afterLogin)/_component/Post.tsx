@@ -1,9 +1,11 @@
-import type { Post as IPost } from '@/model/Post'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
+import Image from 'next/image'
 import Link from 'next/link'
 import PostArticle from './PostArticle'
 import PostImages from './PostImages'
+
+import type { Post as IPost } from '@/model/Post'
 
 dayjs.locale('ko')
 dayjs.extend(relativeTime)
@@ -21,7 +23,7 @@ export default function Post({ noImage, post }: PostType) {
       <div className="flex flex-row">
         <div className="mr-[8px]">
           <Link href={`/${target?.User.id}`}>
-            <img
+            <Image
               src={target?.User.image}
               alt={target?.User.nickname}
               width={40}

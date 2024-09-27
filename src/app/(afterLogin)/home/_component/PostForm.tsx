@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import type { Session } from 'next-auth'
 import { type ChangeEventHandler, useRef, useState } from 'react'
 
@@ -23,9 +24,9 @@ export default function PostForm({ me }: Props) {
     <form>
       <div className="flex w-[100%] border-border border-b px-[16px] py-[12px]">
         <div>
-          <img
+          <Image
             src={me?.user?.image as string}
-            alt={me?.user?.id}
+            alt={me?.user?.id as string}
             width={40}
             height={40}
             className="mr-[8px] rounded-[100%]"

@@ -1,9 +1,10 @@
 'use client'
 
-import type { User } from '@/model/User'
 import { useQuery } from '@tanstack/react-query'
 import { getFollowRecommends } from '../_lib/getFollowRecommends'
 import FollowRecommend from './FollowRecommend'
+
+import type { User } from '@/model/User'
 
 export default function FollowRecommendsSection() {
   const { data } = useQuery<User[]>({

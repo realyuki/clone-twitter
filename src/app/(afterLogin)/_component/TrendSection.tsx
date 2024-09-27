@@ -1,11 +1,12 @@
 'use client'
 
-import type { Hashtag } from '@/model/Hashtag'
 import { useQuery } from '@tanstack/react-query'
-import { useSession } from 'next-auth/react'
 import { usePathname } from 'next/navigation'
+import { useSession } from 'next-auth/react'
 import { getTrends } from '../_lib/getTrands'
 import Trend from './Trend'
+
+import type { Hashtag } from '@/model/Hashtag'
 
 export default function TrendSection() {
   const pathname = usePathname()

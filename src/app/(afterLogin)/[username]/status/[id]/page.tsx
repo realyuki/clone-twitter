@@ -1,11 +1,12 @@
-import BackButton from '@/app/(afterLogin)/_component/BackButton'
-import Post from '@/app/(afterLogin)/_component/Post'
-import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query'
+import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query'
 import { getComments } from '../../_lib/getComments'
 import CommentForm from './_component/CommentForm'
 import Comments from './_component/Comments'
 import SinglePost from './_component/SinglePost'
 import { getSinglePost } from './_lib/getSinglePost'
+
+import BackButton from '@/app/(afterLogin)/_component/BackButton'
+import Post from '@/app/(afterLogin)/_component/Post'
 
 type Prop = {
   params: {

@@ -1,11 +1,12 @@
 'use client'
 
-import type { Post as IPost } from '@/model/Post'
 import { type InfiniteData, useSuspenseInfiniteQuery } from '@tanstack/react-query'
 import { Fragment, useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
 import Post from '../../_component/Post'
 import { getPostRecommends } from '../_lib/getPostRecommends'
+
+import type { Post as IPost } from '@/model/Post'
 
 export default function PostRecommends() {
   const { data, fetchNextPage, hasNextPage, isFetching, isPending, isError } = useSuspenseInfiniteQuery<

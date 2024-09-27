@@ -1,5 +1,6 @@
-import type { Post } from '@/model/Post'
 import type { QueryFunction } from '@tanstack/react-query'
+
+import type { Post } from '@/model/Post'
 
 export const getSearchResult: QueryFunction<
   Post[],

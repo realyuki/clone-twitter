@@ -1,6 +1,7 @@
-import type { User } from '@/model/User'
-import Link from 'next/link'
 import Image from 'next/image'
+import Link from 'next/link'
+
+import type { User } from '@/model/User'
 
 type PostImagesProps = {
   post: {

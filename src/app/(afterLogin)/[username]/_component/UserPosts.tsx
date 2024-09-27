@@ -1,9 +1,10 @@
 'use client'
 
-import type { Post as IPost } from '@/model/Post'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import Post from '../../_component/Post'
 import { getUserPosts } from '../_lib/getUserPost'
+
+import type { Post as IPost } from '@/model/Post'
 
 type Prop = {
   username: string

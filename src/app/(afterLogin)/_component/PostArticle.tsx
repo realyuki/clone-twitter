@@ -1,8 +1,9 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
+
 import type { PostImage } from '@/model/PostImage'
 import type { User } from '@/model/User'
-import { useRouter } from 'next/navigation'
 
 type Props = {
   children: React.ReactNode

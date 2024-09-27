@@ -1,12 +1,13 @@
-import { auth } from '@/auth'
 import Image from 'next/image'
 import Link from 'next/link'
 import FollowRecommendsSection from './_component/FollowRecommendsSection'
 import LogoutButton from './_component/LogoutButton'
 import NavMenu from './_component/NavMenu'
-import RQProvider from './_component/RQProvider'
 import RightSearchZone from './_component/RightSearchZone'
+import RQProvider from './_component/RQProvider'
 import TrendSection from './_component/TrendSection'
+
+import { auth } from '@/auth'
 
 interface Props {
   children: React.ReactNode
@@ -38,7 +39,7 @@ export default async function AfterLoginLayout({ children, modal }: Props) {
                         </Link>
                       </div>
                     </nav>
-                    <LogoutButton />
+                    <LogoutButton me={session} />
                   </>
                 )}
               </div>

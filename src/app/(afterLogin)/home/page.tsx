@@ -4,6 +4,7 @@ import Tab from './_component/Tab'
 import TabDeciderSuspence from './_component/TabDeciderSuspence'
 import TabProvider from './_component/TabProvider'
 import Loading from './loading'
+
 import { auth } from '@/auth'
 
 export default async function Home() {

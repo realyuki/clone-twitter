@@ -1,9 +1,10 @@
 'use client'
 
-import type { Post as IPost } from '@/model/Post'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import Post from '../../_component/Post'
 import { getFollowingPosts } from '../_lib/getFollowingPosts'
+
+import type { Post as IPost } from '@/model/Post'
 
 export default function FollowingPosts() {
   const { data } = useSuspenseQuery<IPost[]>({

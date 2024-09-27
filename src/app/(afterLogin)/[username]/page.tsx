@@ -13,14 +13,17 @@ type Prop = {
 export default async function Profile({ params }: Prop) {
   const { username } = params
   const queryClient = new QueryClient()
+
   await queryClient.prefetchQuery({
     queryKey: ['users', username],
     queryFn: getUser
   })
+
   await queryClient.prefetchQuery({
     queryKey: ['posts', 'users', username],
     queryFn: getUserPosts
   })
+
   const user = {
     id: 'realyuki',
     nickname: '깽자',

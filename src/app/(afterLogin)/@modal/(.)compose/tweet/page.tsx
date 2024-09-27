@@ -1,8 +1,9 @@
 'use client'
 
-import PostForm from '@/app/(afterLogin)/home/_component/PostForm'
 import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
+
+import PostForm from '@/app/(afterLogin)/home/_component/PostForm'
 
 export default function TweetModal() {
   const router = useRouter()

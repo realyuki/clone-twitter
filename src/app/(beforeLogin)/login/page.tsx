@@ -1,8 +1,9 @@
 'use client'
 
-import Main from '@/app/(beforeLogin)/_component/Main'
-import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
+import { useSession } from 'next-auth/react'
+
+import Main from '@/app/(beforeLogin)/_component/Main'
 
 export default function Login() {
   const router = useRouter()

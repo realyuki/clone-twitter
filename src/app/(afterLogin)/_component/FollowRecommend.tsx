@@ -1,5 +1,7 @@
 'use client'
 
+import Image from 'next/image'
+
 import type { User } from '@/model/User'
 
 type Prop = {
@@ -12,7 +14,7 @@ export default function FollowRecommend({ user }: Prop) {
   return (
     <div className="flex flex-row px-[16px] py-[12px]">
       <div className="mr-[8px] h-[40px] w-[40px]">
-        <img src={user.image} alt={user.id} className="rounded-[100%]" />
+        <Image src={user.image} alt={user.id} className="rounded-[100%]" />
       </div>
       <div className="flex grow-[1] flex-col">
         <span className="text-[15px]">{user.nickname}</span>

@@ -1,5 +1,6 @@
-import type { Hashtag } from '@/model/Hashtag'
 import Link from 'next/link'
+
+import type { Hashtag } from '@/model/Hashtag'
 
 type Prop = {
   trend: Hashtag

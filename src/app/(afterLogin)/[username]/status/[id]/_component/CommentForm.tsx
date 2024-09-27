@@ -1,6 +1,7 @@
 'use client'
 
 import { useQueryClient } from '@tanstack/react-query'
+import Image from 'next/image'
 import { useSession } from 'next-auth/react'
 import { useRef, useState } from 'react'
 
@@ -26,7 +27,12 @@ export default function CommentForm({ id }: Props) {
     <form onSubmit={onSubmit} className="border-border border-b border-solid px-[16px] py-[14px]">
       <div className="flex flex-row">
         <div>
-          <img width={40} src={me?.user?.image as string} alt={me?.user?.id} className="mr-[8px] rounded-[100%]" />
+          <Image
+            width={40}
+            src={me?.user?.image as string}
+            alt={me?.user?.id as string}
+            className="mr-[8px] rounded-[100%]"
+          />
         </div>
         <div className="flex grow-[1] flex-col">
           <textarea onChange={onChange} placeholder="Post your reply" />

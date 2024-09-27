@@ -1,8 +1,9 @@
-import { getComments } from '@/app/(afterLogin)/[username]/_lib/getComments'
-import { getSinglePost } from '@/app/(afterLogin)/[username]/status/[id]/_lib/getSinglePost'
-import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query'
+import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query'
 import CloseButton from './_component/CloseButton'
 import ImageZone from './_component/ImageZone'
+
+import { getComments } from '@/app/(afterLogin)/[username]/_lib/getComments'
+import { getSinglePost } from '@/app/(afterLogin)/[username]/status/[id]/_lib/getSinglePost'
 
 interface Props {
   params: {

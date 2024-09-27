@@ -1,8 +1,8 @@
 'use client'
 
-import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { useSelectedLayoutSegment } from 'next/navigation'
+import { useSession } from 'next-auth/react'
 
 export default function NavMenu() {
   const segment = useSelectedLayoutSegment()

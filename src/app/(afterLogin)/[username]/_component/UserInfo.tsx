@@ -1,10 +1,11 @@
 'use client'
 
+import { useQuery } from '@tanstack/react-query'
+import Image from 'next/image'
+import { getUser } from '../_lib/getUser'
+
 import BackButton from '@/app/(afterLogin)/_component/BackButton'
 import type { User } from '@/model/User'
-import { useQuery } from '@tanstack/react-query'
-import { getUser } from '../_lib/getUser'
-import Image from 'next/image'
 
 type Props = {
   username: string

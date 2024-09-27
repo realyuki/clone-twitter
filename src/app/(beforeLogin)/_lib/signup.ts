@@ -1,7 +1,8 @@
 'use server'
 
-import { signIn } from '@/auth'
 import { redirect } from 'next/navigation'
+
+import { signIn } from '@/auth'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default async (prevState: any, formData: FormData) => {
