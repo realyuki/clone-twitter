@@ -16,10 +16,10 @@ pre-commit:
   parallel: true
   commands:
     eslint:
-      glob: '*.{js,ts,jsx,tsx}'
+      glob: './src/**/*.{ts,tsx}'
       run: yarn lint {staged_files}
     prettier:
-      glob: '*.{js,ts,jsx,tsx}'
+      glob: './src/**/*.{ts.tsx}'
       run: yarn prettier {staged_files}
 #     rubocop:
 #       tags: backend style
