@@ -1,6 +1,6 @@
 name: PR Test
 
-on: 
+on:
   pull_request:
     branches: ['main', 'develop']
 
@@ -8,13 +8,16 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout to this repository
-        uses: actions/checkout@v4
-      - name: Use Node.js
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js environment
         uses: actions/setup-node@v3
         with:
           node-version-file: .node-version
-      - name: Install dependencies from lock file
-        run: yarn
-      - name: Run test
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Run tests
         run: yarn test
