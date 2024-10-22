@@ -4,6 +4,8 @@ import UserPosts from './_component/UserPosts'
 import { getUser } from './_lib/getUser'
 import { getUserPosts } from './_lib/getUserPost'
 
+import { auth } from '@/auth'
+
 type Prop = {
   params: {
     username: string
@@ -12,6 +14,7 @@ type Prop = {
 
 export default async function Profile({ params }: Prop) {
   const { username } = params
+  const session = await auth()
   const queryClient = new QueryClient()
 
   await queryClient.prefetchQuery({
@@ -24,18 +27,10 @@ export default async function Profile({ params }: Prop) {
     queryFn: getUserPosts
   })
 
-  const user = {
-    id: 'realyuki',
-    nickname: '깽자',
-    image: '/realyuki.png',
-    bannerImage: '/banner.jpg',
-    posts: 10
-  }
-
   return (
     <div>
       <HydrationBoundary>
-        <UserInfo username={username} />
+        <UserInfo username={username} session={session} />
         <div>
           <UserPosts username={username} />
         </div>

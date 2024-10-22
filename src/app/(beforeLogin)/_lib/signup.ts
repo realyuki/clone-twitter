@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation'
 
 import { signIn } from '@/auth'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any, import/no-anonymous-default-export
 export default async (prevState: any, formData: FormData) => {
   if (!formData.get('id') || !(formData.get('id') as string)?.trim()) {
     return {
@@ -26,6 +26,8 @@ export default async (prevState: any, formData: FormData) => {
       message: 'no_image'
     }
   }
+
+  formData.set('nickname', formData.get('name') as string)
 
   let shouldRedirect = false
 

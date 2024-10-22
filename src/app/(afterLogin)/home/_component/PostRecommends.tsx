@@ -68,13 +68,11 @@ export default function PostRecommends() {
   if (isError) return 'error 처리'
 
   return data?.pages.map((page, i) => (
-    <>
-      <Fragment key={i}>
-        {page.map((post) => (
-          <Post key={post.postId} post={post} />
-        ))}
-      </Fragment>
+    <Fragment key={i}>
+      {page.map((post) => (
+        <Post key={post.postId} post={post} />
+      ))}
       <div ref={ref} style={{ height: 50 }} />
-    </>
+    </Fragment>
   ))
 }

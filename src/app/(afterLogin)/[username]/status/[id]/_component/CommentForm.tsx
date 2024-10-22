@@ -29,6 +29,7 @@ export default function CommentForm({ id }: Props) {
         <div>
           <Image
             width={40}
+            height={40}
             src={me?.user?.image as string}
             alt={me?.user?.id as string}
             className="mr-[8px] rounded-[100%]"

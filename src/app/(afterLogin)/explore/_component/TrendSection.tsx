@@ -2,7 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query'
 import Trend from '../../_component/Trend'
-import { getTrends } from '../../_lib/getTrands'
+import { getTrends } from '../../_lib/getTrends'
 
 import type { Hashtag } from '@/model/Hashtag'
 

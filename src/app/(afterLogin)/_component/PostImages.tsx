@@ -27,7 +27,7 @@ export default function PostImages({ post }: PostImagesProps) {
           backgroundSize: 'contain'
         }}
       >
-        <Image src={post.Images[0]?.link} alt="" />
+        <Image width={40} height={40} src={post.Images[0]?.link} alt="" />
       </Link>
     )
   }

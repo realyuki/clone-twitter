@@ -1,6 +1,7 @@
 'use client'
 
-import { useQuery } from '@tanstack/react-query'
+import { Session } from '@auth/core/types'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import Image from 'next/image'
 import { getUser } from '../_lib/getUser'
 
@@ -9,9 +10,10 @@ import type { User } from '@/model/User'
 
 type Props = {
   username: string
+  session: Session | null
 }
 
-export default function UserInfo({ username }: Props) {
+export default function UserInfo({ username, session }: Props) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { data: user, error } = useQuery<User, Record<string, any>, User, [_1: string, _2: string]>({
     queryKey: ['users', username],
@@ -19,6 +21,8 @@ export default function UserInfo({ username }: Props) {
     staleTime: 60 * 1000,
     gcTime: 300 * 1000
   })
+
+  const queryClient = useQueryClient()
 
   if (error) {
     return (
@@ -40,9 +44,15 @@ export default function UserInfo({ username }: Props) {
         </div>
       </div>
       <div className="relative">
-        <div>{/* <img src={user.bannerImage} alt="" /> */}</div>
+        <div className="h-[100px]">{/* <img src={user.bannerImage} alt="" /> */}</div>
         <div className="absolute left-16 mt-[-67px] w-[145px]">
-          <Image src={user.image} alt={username} className="rounded-16 border-4 border-black border-solid" />
+          <Image
+            width={40}
+            height={40}
+            src={user.image}
+            alt={username}
+            className="rounded-16 border-4 border-black border-solid w-[64px] h-[64px]"
+          />
         </div>
       </div>
       <div className="flex flex-col">

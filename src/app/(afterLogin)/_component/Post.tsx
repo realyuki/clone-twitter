@@ -2,21 +2,26 @@ import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import Image from 'next/image'
 import Link from 'next/link'
+import ActionButtons from './ActionButtons'
 import PostArticle from './PostArticle'
 import PostImages from './PostImages'
 
-import type { Post as IPost } from '@/model/Post'
+import type { Post } from '@/model/Post'
 
 dayjs.locale('ko')
 dayjs.extend(relativeTime)
 
 type PostType = {
   noImage?: boolean
-  post: IPost
+  post: Post
 }
 
 export default function Post({ noImage, post }: PostType) {
-  const target = post
+  let target = post
+
+  if (post.Original) {
+    target = post.Original
+  }
 
   return (
     <PostArticle post={target}>
@@ -24,10 +29,10 @@ export default function Post({ noImage, post }: PostType) {
         <div className="mr-[8px]">
           <Link href={`/${target?.User.id}`}>
             <Image
-              src={target?.User.image}
-              alt={target?.User.nickname}
               width={40}
               height={40}
+              src={target?.User.image}
+              alt={target?.User.nickname}
               className="rounded-[100%]"
             />
           </Link>
@@ -43,7 +48,7 @@ export default function Post({ noImage, post }: PostType) {
           </div>
           <div>{target?.content}</div>
           <div className="mt-[12px] overflow-hidden rounded-[16px]">{!noImage && <PostImages post={target} />}</div>
-          <div>Action button</div>
+          <ActionButtons post={target} />
         </div>
       </div>
     </PostArticle>

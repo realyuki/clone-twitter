@@ -25,7 +25,7 @@ export default async function AfterLoginLayout({ children, modal }: Props) {
             <section className="px-[8px]">
               <div className="w-[275px]">
                 <Link href={`${session?.user ? 'home' : '/'}`}>
-                  <Image src="/yRsRRjGO.jpg" alt="x.com" width={40} height={40} />
+                  <Image width={40} height={40} src="/yRsRRjGO.jpg" alt="x.com" />
                 </Link>
                 {session?.user && (
                   <>

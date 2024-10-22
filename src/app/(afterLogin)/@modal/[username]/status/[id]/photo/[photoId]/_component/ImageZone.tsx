@@ -25,7 +25,7 @@ export default function ImageZone({ id }: Props) {
   return (
     <div className="flex grow-[1] flex-row justify-between">
       <div className="flex h-[100vh] grow-[1] justify-center">
-        <Image src={post.Images[0].link} alt={post.content} />
+        <Image width={40} height={40} src={post.Images[0].link} alt={post.content} />
       </div>
       <div className="w-[350px] border-border border-l border-solid">
         <SinglePost id={id} noImage />

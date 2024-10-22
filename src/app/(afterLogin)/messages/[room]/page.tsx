@@ -50,7 +50,7 @@ export default function ChatRoom() {
         </div>
       </div>
       <Link href={user.nickname} className="flex flex-col items-center bg-gray px-[20px] py-[16px]">
-        <Image width={64} src={user.image} alt={user.id} />
+        <Image width={64} height={64} src={user.image} alt={user.id} />
         <div className="mt-[4px]">
           <b>{user.nickname}</b>
         </div>
