@@ -1,6 +1,8 @@
-import { useQueryClient } from '@tanstack/react-query'
+import { InfiniteData, useMutation, useQueryClient } from '@tanstack/react-query'
+import { produce } from 'immer'
 import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
+import { MouseEventHandler } from 'react'
 
 import { Post } from '@/model/Post'
 
@@ -13,6 +15,110 @@ export default function ActionButtons({ white, post }: Props) {
   const queryClient = useQueryClient()
   const { data: session } = useSession()
   const router = useRouter()
+  const { postId } = post
+
+  const reposted = !!post.Reposts?.find((v) => v.userId === session?.user?.email)
+  const liked = !!post.Hearts?.find((v) => v.userId === session?.user?.email)
+
+  const heart = useMutation({
+    mutationFn: () => {
+      return fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/posts/${postId}/heart`, {
+        method: 'post',
+        credentials: 'include'
+      })
+    },
+    onMutate() {
+      const queryCache = queryClient.getQueryCache()
+      const queryKeys = queryCache.getAll().map((cache) => cache.queryKey)
+
+      queryKeys.forEach((queryKey) => {
+        if (queryKey[0] === 'posts') {
+          const value: Post | InfiniteData<Post[]> | undefined = queryClient.getQueryData(queryKey)
+
+          if (value && 'pages' in value) {
+            const updatedValue = produce(value, (draft) => {
+              const obj = draft.pages.flat().find((v) => v.postId === postId)
+              if (obj) {
+                const pageIndex = draft.pages.findIndex((page) => page.includes(obj))
+                const index = draft.pages[pageIndex].findIndex((v) => v.postId === postId)
+
+                draft.pages[pageIndex][index].Hearts = [{ userId: session?.user?.email as string }]
+                draft.pages[pageIndex][index]._count.Hearts += 1
+              }
+            })
+
+            queryClient.setQueryData(queryKey, updatedValue)
+          } else if (value) {
+            // 싱글 포스트인 경우
+            const updatedValue = produce(value, (draft) => {
+              if (draft.postId === postId) {
+                draft.Hearts = [{ userId: session?.user?.email as string }]
+                draft._count.Hearts += 1
+              }
+            })
+
+            queryClient.setQueryData(queryKey, updatedValue)
+          }
+        }
+      })
+    }
+  })
+
+  const unheart = useMutation({
+    mutationFn: () => {
+      return fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/posts/${postId}/heart`, {
+        method: 'delete',
+        credentials: 'include'
+      })
+    },
+    onMutate() {
+      const queryCache = queryClient.getQueryCache()
+      const queryKeys = queryCache.getAll().map((cache) => cache.queryKey)
+
+      queryKeys.forEach((queryKey) => {
+        if (queryKey[0] === 'posts') {
+          const value: Post | InfiniteData<Post[]> | undefined = queryClient.getQueryData(queryKey)
+
+          if (value && 'pages' in value) {
+            // 여러 페이지로 이루어진 경우
+            const updatedValue = produce(value, (draft) => {
+              const obj = draft.pages.flat().find((v) => v.postId === postId)
+              if (obj) {
+                const pageIndex = draft.pages.findIndex((page) => page.includes(obj))
+                const index = draft.pages[pageIndex].findIndex((v) => v.postId === postId)
+
+                draft.pages[pageIndex][index].Hearts = draft.pages[pageIndex][index].Hearts.filter(
+                  (v) => v.userId !== session?.user?.email
+                )
+                draft.pages[pageIndex][index]._count.Hearts -= 1
+              }
+            })
+
+            queryClient.setQueryData(queryKey, updatedValue)
+          } else if (value) {
+            // 단일 포스트인 경우
+            const updatedValue = produce(value, (draft) => {
+              if (draft.postId === postId) {
+                draft.Hearts = draft.Hearts.filter((v) => v.userId !== session?.user?.email)
+                draft._count.Hearts -= 1
+              }
+            })
+
+            queryClient.setQueryData(queryKey, updatedValue)
+          }
+        }
+      })
+    }
+  })
+
+  const onClickHeart: MouseEventHandler<HTMLButtonElement> = (e) => {
+    e.stopPropagation()
+    if (liked) {
+      unheart.mutate()
+    } else {
+      heart.mutate()
+    }
+  }
 
   return (
     <div className="flex gap-[24px]">
@@ -24,7 +130,7 @@ export default function ActionButtons({ white, post }: Props) {
             </g>
           </svg>
         </button>
-        <div>{post._count?.Comments || '1'}</div>
+        <div>{post._count?.Comments || ''}</div>
       </div>
       <div className="flex items-center gap-[4px]">
         <button>
@@ -34,17 +140,17 @@ export default function ActionButtons({ white, post }: Props) {
             </g>
           </svg>
         </button>
-        <div>{post._count?.Reposts || '0'}</div>
+        <div>{post._count?.Reposts || ''}</div>
       </div>
       <div className="flex items-center gap-[4px]">
-        <button>
+        <button onClick={onClickHeart}>
           <svg className="fill-white" width={24} viewBox="0 0 24 24" aria-hidden="true">
             <g>
               <path d="M16.697 5.5c-1.222-.06-2.679.51-3.89 2.16l-.805 1.09-.806-1.09C9.984 6.01 8.526 5.44 7.304 5.5c-1.243.07-2.349.78-2.91 1.91-.552 1.12-.633 2.78.479 4.82 1.074 1.97 3.257 4.27 7.129 6.61 3.87-2.34 6.052-4.64 7.126-6.61 1.111-2.04 1.03-3.7.477-4.82-.561-1.13-1.666-1.84-2.908-1.91zm4.187 7.69c-1.351 2.48-4.001 5.12-8.379 7.67l-.503.3-.504-.3c-4.379-2.55-7.029-5.19-8.382-7.67-1.36-2.5-1.41-4.86-.514-6.67.887-1.79 2.647-2.91 4.601-3.01 1.651-.09 3.368.56 4.798 2.01 1.429-1.45 3.146-2.1 4.796-2.01 1.954.1 3.714 1.22 4.601 3.01.896 1.81.846 4.17-.514 6.67z"></path>
             </g>
           </svg>
         </button>
-        <div>{post._count?.Hearts || '2'}</div>
+        <div>{post._count?.Hearts || ''}</div>
       </div>
     </div>
   )

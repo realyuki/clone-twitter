@@ -2,6 +2,7 @@ import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import Image from 'next/image'
 import Link from 'next/link'
+import { MouseEventHandler } from 'react'
 import ActionButtons from './ActionButtons'
 import PostArticle from './PostArticle'
 import PostImages from './PostImages'
@@ -23,11 +24,15 @@ export default function Post({ noImage, post }: PostType) {
     target = post.Original
   }
 
+  const stopPropagation: MouseEventHandler<HTMLAnchorElement> = (e) => {
+    e.stopPropagation()
+  }
+
   return (
     <PostArticle post={target}>
       <div className="flex flex-row">
         <div className="mr-[8px]">
-          <Link href={`/${target?.User.id}`}>
+          <Link href={`/${target?.User.id}`} onClick={stopPropagation}>
             <Image
               width={40}
               height={40}
@@ -39,7 +44,7 @@ export default function Post({ noImage, post }: PostType) {
         </div>
         <div className="grow-[1]">
           <div className="mb-[2px] flex items-center gap-[4px]">
-            <Link href={`/${target?.User?.id}`}>
+            <Link href={`/${target?.User?.id}`} onClick={stopPropagation}>
               <span className="mr-[4px] font-bold text-[15px]">{target?.User.nickname}</span>
               <span className="text-[15px] text-gray">@{target?.User.id}</span>
             </Link>

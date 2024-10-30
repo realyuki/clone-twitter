@@ -45,6 +45,7 @@ const RAW_RUNTIME_STATE =
           ["eslint-plugin-react-hooks", "virtual:111ea95f971b5cc54f58c0f073eacb99ae4cb04e15db70f00ea3bd33c31d168965280e65e6c6baf3afa989c2ba22046812f8604d8b6ad86cf7a52337bd1bb40f#npm:4.6.2"],\
           ["eslint-plugin-simple-import-sort", "virtual:111ea95f971b5cc54f58c0f073eacb99ae4cb04e15db70f00ea3bd33c31d168965280e65e6c6baf3afa989c2ba22046812f8604d8b6ad86cf7a52337bd1bb40f#npm:12.1.1"],\
           ["graphql", "npm:16.9.0"],\
+          ["immer", "npm:10.1.1"],\
           ["lefthook", "npm:1.7.17"],\
           ["msw", "virtual:111ea95f971b5cc54f58c0f073eacb99ae4cb04e15db70f00ea3bd33c31d168965280e65e6c6baf3afa989c2ba22046812f8604d8b6ad86cf7a52337bd1bb40f#npm:2.4.9"],\
           ["next", "virtual:111ea95f971b5cc54f58c0f073eacb99ae4cb04e15db70f00ea3bd33c31d168965280e65e6c6baf3afa989c2ba22046812f8604d8b6ad86cf7a52337bd1bb40f#npm:14.2.2"],\
@@ -2137,6 +2138,7 @@ const RAW_RUNTIME_STATE =
           ["eslint-plugin-react-hooks", "virtual:111ea95f971b5cc54f58c0f073eacb99ae4cb04e15db70f00ea3bd33c31d168965280e65e6c6baf3afa989c2ba22046812f8604d8b6ad86cf7a52337bd1bb40f#npm:4.6.2"],\
           ["eslint-plugin-simple-import-sort", "virtual:111ea95f971b5cc54f58c0f073eacb99ae4cb04e15db70f00ea3bd33c31d168965280e65e6c6baf3afa989c2ba22046812f8604d8b6ad86cf7a52337bd1bb40f#npm:12.1.1"],\
           ["graphql", "npm:16.9.0"],\
+          ["immer", "npm:10.1.1"],\
           ["lefthook", "npm:1.7.17"],\
           ["msw", "virtual:111ea95f971b5cc54f58c0f073eacb99ae4cb04e15db70f00ea3bd33c31d168965280e65e6c6baf3afa989c2ba22046812f8604d8b6ad86cf7a52337bd1bb40f#npm:2.4.9"],\
           ["next", "virtual:111ea95f971b5cc54f58c0f073eacb99ae4cb04e15db70f00ea3bd33c31d168965280e65e6c6baf3afa989c2ba22046812f8604d8b6ad86cf7a52337bd1bb40f#npm:14.2.2"],\
@@ -3744,6 +3746,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/ignore-npm-5.3.2-346d3ba017-f9f652c957.zip/node_modules/ignore/",\
         "packageDependencies": [\
           ["ignore", "npm:5.3.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["immer", [\
+      ["npm:10.1.1", {\
+        "packageLocation": "./.yarn/cache/immer-npm-10.1.1-973ae10d09-b749e10d13.zip/node_modules/immer/",\
+        "packageDependencies": [\
+          ["immer", "npm:10.1.1"]\
         ],\
         "linkType": "HARD"\
       }]\
