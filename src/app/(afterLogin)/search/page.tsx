@@ -1,3 +1,4 @@
+import { Metadata } from 'next'
 import BackButton from '../_component/BackButton'
 import SearchForm from '../_component/SearchForm'
 import SearchResult from './_component/SearchResult'
@@ -8,6 +9,13 @@ type SearchProps = {
     q: string
     f?: string
     pf?: string
+  }
+}
+
+export async function generateMetadata({ searchParams }: SearchProps): Promise<Metadata> {
+  return {
+    title: `${searchParams.q} - 검색 / X`,
+    description: `${searchParams.q} - 검색 / X`
   }
 }
 

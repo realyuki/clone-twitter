@@ -2,21 +2,23 @@
 
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useSession } from 'next-auth/react'
 import { MouseEventHandler } from 'react'
 
 import type { User } from '@/model/User'
 
-type Prop = {
+type Props = {
   user: User
 }
-
-export default function FollowRecommend({ user }: Prop) {
+export default function FollowRecommend({ user }: Props) {
   const { data: session } = useSession()
   const followed = !!user.Followers?.find((v) => v.id === session?.user?.email)
+  console.log('followed', followed)
   const queryClient = useQueryClient()
   const follow = useMutation({
     mutationFn: (userId: string) => {
+      console.log('follow', userId)
       return fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/users/${userId}/follow`, {
         credentials: 'include',
         method: 'post'
@@ -26,6 +28,7 @@ export default function FollowRecommend({ user }: Prop) {
       const value: User[] | undefined = queryClient.getQueryData(['users', 'followRecommends'])
       if (value) {
         const index = value.findIndex((v) => v.id === userId)
+        console.log('follow onMutate', value, userId, index)
         const shallow = [...value]
         shallow[index] = {
           ...shallow[index],
@@ -54,7 +57,7 @@ export default function FollowRecommend({ user }: Prop) {
       const value: User[] | undefined = queryClient.getQueryData(['users', 'followRecommends'])
       if (value) {
         const index = value.findIndex((v) => v.id === userId)
-        console.log(value, userId, index)
+        console.log('follow onError', value, userId, index)
         const shallow = [...value]
         shallow[index] = {
           ...shallow[index],
@@ -80,7 +83,6 @@ export default function FollowRecommend({ user }: Prop) {
       }
     }
   })
-
   const unfollow = useMutation({
     mutationFn: (userId: string) => {
       console.log('unfollow', userId)
@@ -93,7 +95,7 @@ export default function FollowRecommend({ user }: Prop) {
       const value: User[] | undefined = queryClient.getQueryData(['users', 'followRecommends'])
       if (value) {
         const index = value.findIndex((v) => v.id === userId)
-        console.log(value, userId, index)
+        console.log('unfollow onMutate', value, userId, index)
         const shallow = [...value]
         shallow[index] = {
           ...shallow[index],
@@ -122,7 +124,7 @@ export default function FollowRecommend({ user }: Prop) {
       const value: User[] | undefined = queryClient.getQueryData(['users', 'followRecommends'])
       if (value) {
         const index = value.findIndex((v) => v.id === userId)
-        console.log(value, userId, index)
+        console.log('unfollow onError', value, userId, index)
         const shallow = [...value]
         shallow[index] = {
           ...shallow[index],
@@ -148,7 +150,6 @@ export default function FollowRecommend({ user }: Prop) {
       }
     }
   })
-
   const onFollow: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.stopPropagation()
     e.preventDefault()
@@ -161,17 +162,22 @@ export default function FollowRecommend({ user }: Prop) {
   }
 
   return (
-    <div className="flex flex-row px-[16px] py-[12px]">
-      <div className="mr-[8px] h-[40px] w-[40px]">
-        <Image width={40} height={40} src={user.image} alt={user.id} className="rounded-[100%] h-[40px]" />
+    <Link href={`/${user.id}`}>
+      <div className="flex flex-row px-[16px] py-[12px]">
+        <div className="mr-[8px] h-[40px] w-[40px]">
+          <Image width={40} height={40} src={user.image} alt={user.id} className="rounded-[100%] h-[40px]" />
+        </div>
+        <div className="flex grow-[1] flex-col">
+          <span className="text-[15px]">{user.nickname}</span>
+          <span className="text-[15px] text-gray">@{user.id}</span>
+        </div>
+        <button
+          onClick={onFollow}
+          className="button h-[32px] min-h-[32px] w-[auto] bg-white text-[#0f1419] text-[14px]"
+        >
+          <span className="leading-none">{followed ? '팔로잉' : '팔로우'}</span>
+        </button>
       </div>
-      <div className="flex grow-[1] flex-col">
-        <span className="text-[15px]">{user.nickname}</span>
-        <span className="text-[15px] text-gray">@{user.id}</span>
-      </div>
-      <button onClick={onFollow} className="button h-[32px] min-h-[32px] w-[auto] bg-white text-[#0f1419] text-[14px]">
-        <span className="leading-none">{followed ? '팔로잉' : '팔로우'}</span>
-      </button>
-    </div>
+    </Link>
   )
 }
