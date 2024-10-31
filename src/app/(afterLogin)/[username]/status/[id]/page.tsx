@@ -43,7 +43,7 @@ export default async function Page({ params }: Props) {
   return (
     <div>
       <HydrationBoundary state={dehydrated}>
-        <div>
+        <div className="flex gap-[6px] p-[16px]">
           <BackButton />
           <h3>게시하기</h3>
         </div>

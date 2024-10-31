@@ -46,7 +46,20 @@ const config = {
       maxHeight: px0_1000,
       padding: px0_200,
       height: px0_1000,
-      spacing: px0_100
+      spacing: px0_100,
+      keyframes: {
+        'heart-burst': {
+          '0%': {
+            backgroundPosition: 'left'
+          },
+          '100%': {
+            backgroundPosition: 'right'
+          }
+        }
+      },
+      animation: {
+        'heart-burst': 'heart-burst 0.8s steps(28) 1'
+      }
     }
   }
   // plugins: [require('tailwindcss-animate')]
