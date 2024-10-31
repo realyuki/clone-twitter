@@ -61,6 +61,14 @@ export default function Post({ noImage, post }: PostType) {
             <span className="text-[15px] text-gray">·</span>
             <span className="text-[15px] text-gray">{dayjs(target?.createdAt).fromNow(true)}</span>
           </div>
+          {target.Parent && (
+            <div>
+              <Link href={`/${target.Parent.User.id}`} style={{ color: 'rgb(29, 155, 240)' }} onClick={stopPropagation}>
+                @{target.Parent.User.id}
+              </Link>{' '}
+              님에게 보내는 답글
+            </div>
+          )}
           <div>{target?.content}</div>
           <div className="mt-[12px] overflow-hidden rounded-[16px]">{!noImage && <PostImages post={target} />}</div>
           <ActionButtons post={target} />

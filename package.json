@@ -22,7 +22,8 @@
     "react": "^18",
     "react-dom": "^18",
     "react-intersection-observer": "^9.13.1",
-    "react-textarea-autosize": "^8.5.4"
+    "react-textarea-autosize": "^8.5.4",
+    "zustand": "^5.0.1"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",

@@ -59,7 +59,8 @@ const RAW_RUNTIME_STATE =
           ["react-textarea-autosize", "virtual:111ea95f971b5cc54f58c0f073eacb99ae4cb04e15db70f00ea3bd33c31d168965280e65e6c6baf3afa989c2ba22046812f8604d8b6ad86cf7a52337bd1bb40f#npm:8.5.4"],\
           ["tailwindcss", "npm:3.4.13"],\
           ["typescript", "patch:typescript@npm%3A5.6.2#optional!builtin<compat/typescript>::version=5.6.2&hash=8c6c40"],\
-          ["vitest", "virtual:111ea95f971b5cc54f58c0f073eacb99ae4cb04e15db70f00ea3bd33c31d168965280e65e6c6baf3afa989c2ba22046812f8604d8b6ad86cf7a52337bd1bb40f#npm:2.1.1"]\
+          ["vitest", "virtual:111ea95f971b5cc54f58c0f073eacb99ae4cb04e15db70f00ea3bd33c31d168965280e65e6c6baf3afa989c2ba22046812f8604d8b6ad86cf7a52337bd1bb40f#npm:2.1.1"],\
+          ["zustand", "virtual:111ea95f971b5cc54f58c0f073eacb99ae4cb04e15db70f00ea3bd33c31d168965280e65e6c6baf3afa989c2ba22046812f8604d8b6ad86cf7a52337bd1bb40f#npm:5.0.1"]\
         ],\
         "linkType": "SOFT"\
       }]\
@@ -2152,7 +2153,8 @@ const RAW_RUNTIME_STATE =
           ["react-textarea-autosize", "virtual:111ea95f971b5cc54f58c0f073eacb99ae4cb04e15db70f00ea3bd33c31d168965280e65e6c6baf3afa989c2ba22046812f8604d8b6ad86cf7a52337bd1bb40f#npm:8.5.4"],\
           ["tailwindcss", "npm:3.4.13"],\
           ["typescript", "patch:typescript@npm%3A5.6.2#optional!builtin<compat/typescript>::version=5.6.2&hash=8c6c40"],\
-          ["vitest", "virtual:111ea95f971b5cc54f58c0f073eacb99ae4cb04e15db70f00ea3bd33c31d168965280e65e6c6baf3afa989c2ba22046812f8604d8b6ad86cf7a52337bd1bb40f#npm:2.1.1"]\
+          ["vitest", "virtual:111ea95f971b5cc54f58c0f073eacb99ae4cb04e15db70f00ea3bd33c31d168965280e65e6c6baf3afa989c2ba22046812f8604d8b6ad86cf7a52337bd1bb40f#npm:2.1.1"],\
+          ["zustand", "virtual:111ea95f971b5cc54f58c0f073eacb99ae4cb04e15db70f00ea3bd33c31d168965280e65e6c6baf3afa989c2ba22046812f8604d8b6ad86cf7a52337bd1bb40f#npm:5.0.1"]\
         ],\
         "linkType": "SOFT"\
       }]\
@@ -7136,6 +7138,36 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/yoctocolors-cjs-npm-2.1.2-52d47e1a9b-a0e36eb88f.zip/node_modules/yoctocolors-cjs/",\
         "packageDependencies": [\
           ["yoctocolors-cjs", "npm:2.1.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["zustand", [\
+      ["npm:5.0.1", {\
+        "packageLocation": "./.yarn/cache/zustand-npm-5.0.1-bbf1cd61e6-b4239c8bf3.zip/node_modules/zustand/",\
+        "packageDependencies": [\
+          ["zustand", "npm:5.0.1"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:111ea95f971b5cc54f58c0f073eacb99ae4cb04e15db70f00ea3bd33c31d168965280e65e6c6baf3afa989c2ba22046812f8604d8b6ad86cf7a52337bd1bb40f#npm:5.0.1", {\
+        "packageLocation": "./.yarn/__virtual__/zustand-virtual-bdde51ef4c/0/cache/zustand-npm-5.0.1-bbf1cd61e6-b4239c8bf3.zip/node_modules/zustand/",\
+        "packageDependencies": [\
+          ["zustand", "virtual:111ea95f971b5cc54f58c0f073eacb99ae4cb04e15db70f00ea3bd33c31d168965280e65e6c6baf3afa989c2ba22046812f8604d8b6ad86cf7a52337bd1bb40f#npm:5.0.1"],\
+          ["@types/immer", null],\
+          ["@types/react", "npm:18.3.9"],\
+          ["@types/use-sync-external-store", null],\
+          ["immer", "npm:10.1.1"],\
+          ["react", "npm:18.3.1"],\
+          ["use-sync-external-store", null]\
+        ],\
+        "packagePeers": [\
+          "@types/immer",\
+          "@types/react",\
+          "@types/use-sync-external-store",\
+          "immer",\
+          "react",\
+          "use-sync-external-store"\
         ],\
         "linkType": "HARD"\
       }]\

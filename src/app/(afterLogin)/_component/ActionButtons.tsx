@@ -5,6 +5,7 @@ import { useSession } from 'next-auth/react'
 import { MouseEventHandler, useState } from 'react'
 
 import { Post } from '@/model/Post'
+import { useModalStore } from '@/store/modal'
 
 type Props = {
   white?: boolean
@@ -15,10 +16,12 @@ export default function ActionButtons({ white, post }: Props) {
   const queryClient = useQueryClient()
   const { data: session } = useSession()
   const router = useRouter()
-  const { postId } = post
+  const modalStore = useModalStore()
 
   const reposted = !!post.Reposts?.find((v) => v.userId === session?.user?.email)
   const liked = !!post.Hearts?.find((v) => v.userId === session?.user?.email)
+
+  const { postId } = post
 
   const heart = useMutation({
     mutationFn: () => {
@@ -243,16 +246,16 @@ export default function ActionButtons({ white, post }: Props) {
   const onClickComment: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.stopPropagation()
 
-    // modalStore.setMode("comment");
-    // modalStore.setData(post);
+    modalStore.setMode('comment')
+    modalStore.setData(post)
     router.push('/compose/tweet')
-    const formData = new FormData()
-    formData.append('content', '답글 테스트')
-    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/posts/${post.postId}/comments`, {
-      method: 'post',
-      credentials: 'include',
-      body: formData
-    })
+    // const formData = new FormData()
+    // formData.append('content', '답글 테스트')
+    // fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/posts/${post.postId}/comments`, {
+    //   method: 'post',
+    //   credentials: 'include',
+    //   body: formData
+    // })
   }
 
   const onClickRepost: MouseEventHandler<HTMLButtonElement> = (e) => {
