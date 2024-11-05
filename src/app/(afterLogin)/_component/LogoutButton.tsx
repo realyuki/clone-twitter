@@ -1,8 +1,9 @@
 'use client'
 
+import type { Session } from '@auth/core/types'
+import { useQueryClient } from '@tanstack/react-query'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import type { Session } from 'next-auth'
 import { signOut } from 'next-auth/react'
 
 type Props = {
@@ -10,10 +11,21 @@ type Props = {
 }
 
 export default function LogoutButton({ me }: Props) {
+  const queryClient = useQueryClient()
   const router = useRouter()
 
   const onLogout = () => {
-    signOut({ redirect: false }).then(() => {
+    queryClient.invalidateQueries({
+      queryKey: ['posts']
+    })
+    queryClient.invalidateQueries({
+      queryKey: ['users']
+    })
+    signOut().then(() => {
+      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/logout`, {
+        method: 'post',
+        credentials: 'include'
+      })
       router.replace('/')
     })
   }
@@ -25,11 +37,11 @@ export default function LogoutButton({ me }: Props) {
       <div className="flex w-[100%] items-center gap-[12px]">
         <div>
           <Image
-            src={me?.user?.image as string}
-            alt={me?.user?.email as string}
             width={40}
             height={40}
-            className="rounded-[100%]"
+            src={me?.user?.image as string}
+            alt={me?.user?.email as string}
+            className="rounded-[100%] h-[40px]"
           />
         </div>
         <div className="flex flex-col items-start">
