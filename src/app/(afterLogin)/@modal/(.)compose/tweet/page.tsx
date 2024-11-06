@@ -1,6 +1,8 @@
 'use client'
 
 import { InfiniteData, useMutation, useQueryClient } from '@tanstack/react-query'
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
 import { produce } from 'immer'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -11,6 +13,9 @@ import TextareaAutosize from 'react-textarea-autosize'
 
 import { Post } from '@/model/Post'
 import { useModalStore } from '@/store/modal'
+
+dayjs.locale('ko')
+dayjs.extend(relativeTime)
 
 export default function TweetModal() {
   const [content, setContent] = useState('')
@@ -180,25 +185,51 @@ export default function TweetModal() {
         <form onSubmit={onSubmit}>
           {modalStore.mode === 'comment' && parent && (
             <div>
-              <div>
-                <Image width={40} height={40} src={parent.User.image} alt={parent.User.id} />
-              </div>
-              {parent.content}
-              <div>
-                <Link href={`/${parent.User.id}`}>@{parent.User.id}</Link>
-                님에게 보내는 답글
+              <div className="flex gap-[8px] text-[15px]">
+                <div>
+                  <Image
+                    width={40}
+                    height={40}
+                    src={parent.User.image}
+                    alt={parent.User.id}
+                    className="rounded-[50%]"
+                  />
+                </div>
+                <div>
+                  <div className="flex text-gray">
+                    <Link href={`/${parent.User.id}`} className="text-white mr-[4px]">
+                      {parent.User.nickname}
+                    </Link>
+                    <div>{`@${parent.User.id}`}</div>
+                    <div className="px-[4px]">·</div>
+                    <div>{dayjs(parent?.createdAt).fromNow(true)}</div>
+                  </div>
+                  <div>{parent.content}</div>
+                  <div className="mt-[12px] text-gray">
+                    Replying to <span className="text-blue">@{parent.User.id}</span>
+                  </div>
+                </div>
               </div>
             </div>
           )}
-          <div>
-            <Image width={40} height={40} src={me?.user?.image as string} alt={me?.user?.email as string} />
-          </div>
-          <div>
-            <TextareaAutosize
-              placeholder={modalStore.mode === 'comment' ? '답글 게시하기' : '무슨 일이 일어나고 있나요?'}
-              value={content}
-              onChange={onChange}
-            />
+          <div className="flex gap-[8px] mt-[12px]">
+            <div>
+              <Image
+                width={40}
+                height={40}
+                src={me?.user?.image as string}
+                alt={me?.user?.email as string}
+                className="rounded-[50%]"
+              />
+            </div>
+            <div>
+              <TextareaAutosize
+                placeholder={modalStore.mode === 'comment' ? 'Post your reply' : '무슨 일이 일어나고 있나요?'}
+                value={content}
+                onChange={onChange}
+                className="w-[100%] resize-none bg-transparent py-[12px] placeholder:text-gray"
+              />
+            </div>
           </div>
           <div>
             {preview.map(
@@ -222,17 +253,19 @@ export default function TweetModal() {
           </div>
           <div>
             <input type="file" name="imageFiles" multiple hidden ref={imageRef} onChange={onUpload} />
-            <button type="button" onClick={onClickButton}>
-              <svg width={24} viewBox="0 0 24 24" aria-hidden="true">
-                <g>
-                  <path d="M3 5.5C3 4.119 4.119 3 5.5 3h13C19.881 3 21 4.119 21 5.5v13c0 1.381-1.119 2.5-2.5 2.5h-13C4.119 21 3 19.881 3 18.5v-13zM5.5 5c-.276 0-.5.224-.5.5v9.086l3-3 3 3 5-5 3 3V5.5c0-.276-.224-.5-.5-.5h-13zM19 15.414l-3-3-5 5-3-3-3 3V18.5c0 .276.224.5.5.5h13c.276 0 .5-.224.5-.5v-3.086zM9.75 7C8.784 7 8 7.784 8 8.75s.784 1.75 1.75 1.75 1.75-.784 1.75-1.75S10.716 7 9.75 7z"></path>
-                </g>
-              </svg>
-            </button>
+            <div className="flex justify-between">
+              <button type="button" onClick={onClickButton}>
+                <svg width={24} viewBox="0 0 24 24" aria-hidden="true" className="fill-blue">
+                  <g>
+                    <path d="M3 5.5C3 4.119 4.119 3 5.5 3h13C19.881 3 21 4.119 21 5.5v13c0 1.381-1.119 2.5-2.5 2.5h-13C4.119 21 3 19.881 3 18.5v-13zM5.5 5c-.276 0-.5.224-.5.5v9.086l3-3 3 3 5-5 3 3V5.5c0-.276-.224-.5-.5-.5h-13zM19 15.414l-3-3-5 5-3-3-3 3V18.5c0 .276.224.5.5.5h13c.276 0 .5-.224.5-.5v-3.086zM9.75 7C8.784 7 8 7.784 8 8.75s.784 1.75 1.75 1.75 1.75-.784 1.75-1.75S10.716 7 9.75 7z"></path>
+                  </g>
+                </svg>
+              </button>
+              <button className="button w-[auto] text-white bg-blue" disabled={!content}>
+                {modalStore.mode === 'comment' ? 'Reply' : 'Post'}
+              </button>
+            </div>
           </div>
-          <button className="button" disabled={!content}>
-            게시하기
-          </button>
         </form>
       </div>
     </div>
