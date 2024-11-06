@@ -1,6 +1,8 @@
 'use client'
 
 import { InfiniteData, useMutation, useQueryClient } from '@tanstack/react-query'
+import { produce } from 'immer'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
@@ -61,7 +63,7 @@ export default function TweetModal() {
         body: formData
       })
     },
-    async onSuccess(response, variable) {
+    async onSuccess(response) {
       const newPost = await response.json()
       setContent('')
       setPreview([])
@@ -70,43 +72,34 @@ export default function TweetModal() {
       console.log('queryKeys', queryKeys)
       queryKeys.forEach((queryKey) => {
         if (queryKey[0] === 'posts') {
-          console.log(queryKey[0])
           const value: Post | InfiniteData<Post[]> | undefined = queryClient.getQueryData(queryKey)
           if (value && 'pages' in value) {
-            console.log('array', value)
             const obj = value.pages.flat().find((v) => v.postId === parent?.postId)
             if (obj) {
-              // 존재는 하는지
-              const pageIndex = value.pages.findIndex((page) => page.includes(obj))
-              const index = value.pages[pageIndex].findIndex((v) => v.postId === parent?.postId)
-              console.log('found index', index)
-              const shallow = { ...value }
-              value.pages = { ...value.pages }
-              value.pages[pageIndex] = [...value.pages[pageIndex]]
-              shallow.pages[pageIndex][index] = {
-                ...shallow.pages[pageIndex][index],
-                Comments: [{ userId: me?.user?.email as string }],
-                _count: {
-                  ...shallow.pages[pageIndex][index]._count,
-                  Comments: shallow.pages[pageIndex][index]._count.Comments + 1
-                }
-              }
-              shallow.pages[0].unshift(newPost) // 새 답글 추가
-              queryClient.setQueryData(queryKey, shallow)
+              queryClient.setQueryData(
+                queryKey,
+                produce(value, (draft) => {
+                  const pageIndex = draft.pages.findIndex((page) => page.includes(obj))
+                  const postIndex = draft.pages[pageIndex].findIndex((v) => v.postId === parent?.postId)
+
+                  draft.pages[pageIndex][postIndex].Comments.unshift({
+                    userId: me?.user?.email as string
+                  })
+
+                  draft.pages[pageIndex][postIndex]._count.Comments += 1
+                })
+              )
             }
-          } else if (value) {
-            // 싱글 포스트인 경우
-            if (value.postId === parent?.postId) {
-              const shallow = {
-                ...value,
-                Comments: [{ userId: me?.user?.email as string }],
-                _count: {
-                  ...value._count,
-                  Comments: value._count.Comments + 1
-                }
-              }
-              queryClient.setQueryData(queryKey, shallow)
-            }
+          } else if (value && value.postId === parent?.postId) {
+            queryClient.setQueryData(
+              queryKey,
+              produce(value, (draft) => {
+                draft.Comments.unshift({
+                  userId: me?.user?.email as string
+                })
+                draft._count.Comments += 1
+              })
+            )
           }
         }
       })
@@ -186,7 +179,7 @@ export default function TweetModal() {
           {modalStore.mode === 'comment' && parent && (
             <div>
               <div>
-                <img src={parent.User.image} alt={parent.User.id} />
+                <Image width={40} height={40} src={parent.User.image} alt={parent.User.id} />
               </div>
               {parent.content}
               <div>
@@ -196,7 +189,7 @@ export default function TweetModal() {
             </div>
           )}
           <div>
-            <img src={me?.user?.image as string} alt={me?.user?.email as string} />
+            <Image width={40} height={40} src={me?.user?.image as string} alt={me?.user?.email as string} />
           </div>
           <div>
             <TextareaAutosize
@@ -210,8 +203,10 @@ export default function TweetModal() {
               (v, index) =>
                 v && (
                   <div key={index} style={{ flex: 1 }} onClick={onRemoveImage(index)}>
-                    <img
+                    <Image
                       src={v.dataUrl}
+                      width={40}
+                      height={40}
                       alt="미리보기"
                       style={{
                         width: '100%',

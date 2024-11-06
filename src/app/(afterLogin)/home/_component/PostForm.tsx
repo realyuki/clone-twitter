@@ -1,6 +1,7 @@
 'use client'
 
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { produce } from 'immer'
 import Image from 'next/image'
 import type { Session } from 'next-auth'
 import { type ChangeEventHandler, FormEvent, useRef, useState } from 'react'
@@ -34,31 +35,25 @@ export default function PostForm({ me }: Props) {
         body: formData
       })
     },
-    async onSuccess(response, variable) {
+    async onSuccess(response) {
       const newPost = await response.json()
       setContent('')
       setPreview([])
-      if (queryClient.getQueryData(['posts', 'recommends'])) {
-        queryClient.setQueryData(['posts', 'recommends'], (prevData: { pages: Post[][] }) => {
-          const shallow = {
-            ...prevData,
-            pages: [...prevData.pages]
-          }
-          shallow.pages[0] = [...shallow.pages[0]]
-          shallow.pages[0].unshift(newPost)
-          return shallow
-        })
+
+      const updatePostList = (key: string) => {
+        queryClient.setQueryData(['posts', key], (prevData: { pages: Post[][] }) =>
+          produce(prevData, (draft) => {
+            draft.pages[0].unshift(newPost)
+          })
+        )
       }
+
+      if (queryClient.getQueryData(['posts', 'recommends'])) {
+        updatePostList('recommends')
+      }
+
       if (queryClient.getQueryData(['posts', 'followings'])) {
-        queryClient.setQueryData(['posts', 'followings'], (prevData: { pages: Post[][] }) => {
-          const shallow = {
-            ...prevData,
-            pages: [...prevData.pages]
-          }
-          shallow.pages[0] = [...shallow.pages[0]]
-          shallow.pages[0].unshift(newPost)
-          return shallow
-        })
+        updatePostList('followings')
       }
     }
   })
@@ -77,14 +72,14 @@ export default function PostForm({ me }: Props) {
       Array.from(e.target.files).forEach((file, index) => {
         const reader = new FileReader()
         reader.onloadend = () => {
-          setPreview((prevPreview) => {
-            const prev = [...prevPreview]
-            prev[index] = {
-              dataUrl: reader.result as string,
-              file
-            }
-            return prev
-          })
+          setPreview((prevPreview) =>
+            produce(prevPreview, (draft) => {
+              draft[index] = {
+                dataUrl: reader.result as string,
+                file
+              }
+            })
+          )
         }
         reader.readAsDataURL(file)
       })
@@ -123,7 +118,13 @@ export default function PostForm({ me }: Props) {
               (v, index) =>
                 v && (
                   <div key={index} className="flex" onClick={onRemoveImage(index)}>
-                    <img src={v.dataUrl} alt="미리보기" className="w-[100%] max-h-[100px] object-contain" />
+                    <Image
+                      width={40}
+                      height={40}
+                      src={v.dataUrl}
+                      alt="미리보기"
+                      className="w-[100%] max-h-[100px] object-contain"
+                    />
                   </div>
                 )
             )}
