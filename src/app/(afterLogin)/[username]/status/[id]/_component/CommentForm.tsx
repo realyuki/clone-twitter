@@ -1,9 +1,10 @@
 'use client'
 
-import { useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { produce } from 'immer'
 import Image from 'next/image'
 import { useSession } from 'next-auth/react'
-import { useRef, useState } from 'react'
+import { ChangeEventHandler, FormEvent, useRef, useState } from 'react'
 
 type Props = {
   id: string
@@ -11,20 +12,64 @@ type Props = {
 
 export default function CommentForm({ id }: Props) {
   const [content, setContent] = useState('')
+  const [preview, setPreview] = useState<Array<{ dataUrl: string; file: File } | null>>([])
   const imageRef = useRef<HTMLInputElement>(null)
   const { data: me } = useSession()
-
-  const onClickButton = () => {}
-  const onSubmit = () => {}
-  const onChange = () => {}
-
   const queryClient = useQueryClient()
   const post = queryClient.getQueryData(['posts', id])
+
+  const onClickButton = () => {
+    imageRef.current?.click()
+  }
+  const onChange: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
+    setContent(e.target.value)
+  }
+
+  const mutation = useMutation({
+    mutationFn: async (e: FormEvent) => {
+      e.preventDefault()
+      const formData = new FormData()
+      formData.append('content', content)
+      preview.forEach((p) => {
+        if (p) {
+          formData.append('images', p.file)
+        }
+      })
+    }
+  })
+
+  const onUpload: ChangeEventHandler<HTMLInputElement> = (e) => {
+    e.preventDefault()
+    if (e.target.files) {
+      Array.from(e.target.files).forEach((file, index) => {
+        const reader = new FileReader()
+        reader.onloadend = () => {
+          setPreview((prevPreview) =>
+            produce(prevPreview, (draft) => {
+              draft[index] = {
+                dataUrl: reader.result as string,
+                file
+              }
+            })
+          )
+        }
+        reader.readAsDataURL(file)
+      })
+    }
+  }
+
+  const onRemoveImage = (index: number) => () => {
+    setPreview((prevPreview) => {
+      const prev = [...prevPreview]
+      prev[index] = null
+      return prev
+    })
+  }
 
   if (!post) return null
 
   return (
-    <form onSubmit={onSubmit} className="border-border border-b border-solid px-[16px] py-[14px]">
+    <form onSubmit={mutation.mutate} className="border-border border-b border-solid px-[16px] py-[14px]">
       <div className="flex flex-row">
         <div>
           <Image
@@ -37,8 +82,24 @@ export default function CommentForm({ id }: Props) {
         </div>
         <div className="flex grow-[1] flex-col">
           <textarea onChange={onChange} placeholder="Post your reply" />
+          <div className="flex">
+            {preview.map(
+              (v, index) =>
+                v && (
+                  <div key={index} className="flex" onClick={onRemoveImage(index)}>
+                    <Image
+                      width={40}
+                      height={40}
+                      src={v.dataUrl}
+                      alt="미리보기"
+                      className="w-[100%] max-h-[100px] object-contain"
+                    />
+                  </div>
+                )
+            )}
+          </div>
           <div>
-            <input type="file" multiple hidden ref={imageRef} />
+            <input type="file" name="imageFiles" multiple hidden ref={imageRef} onChange={onUpload} />
             <div className="flex flex-row justify-between">
               <button type="button" onClick={onClickButton}>
                 <svg width={24} viewBox="0 0 24 24" aria-hidden="true" className="fill-blue">
@@ -48,7 +109,7 @@ export default function CommentForm({ id }: Props) {
                 </svg>
               </button>
               <button disabled={!content} className="button w-[auto] bg-blue text-white">
-                Reply
+                ReplyReply
               </button>
             </div>
           </div>

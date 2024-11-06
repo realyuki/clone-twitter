@@ -69,43 +69,45 @@ export default function TweetModal() {
       setPreview([])
       const queryCache = queryClient.getQueryCache()
       const queryKeys = queryCache.getAll().map((cache) => cache.queryKey)
-      console.log('queryKeys', queryKeys)
+
       queryKeys.forEach((queryKey) => {
         if (queryKey[0] === 'posts') {
           const value: Post | InfiniteData<Post[]> | undefined = queryClient.getQueryData(queryKey)
+
           if (value && 'pages' in value) {
-            const obj = value.pages.flat().find((v) => v.postId === parent?.postId)
-            if (obj) {
-              queryClient.setQueryData(
-                queryKey,
-                produce(value, (draft) => {
-                  const pageIndex = draft.pages.findIndex((page) => page.includes(obj))
-                  const postIndex = draft.pages[pageIndex].findIndex((v) => v.postId === parent?.postId)
+            // 여러 페이지가 있는 경우
+            const updatedValue = produce(value, (draft) => {
+              const obj = draft.pages.flat().find((v) => v.postId === parent?.postId)
+              if (obj) {
+                const pageIndex = draft.pages.findIndex((page) => page.includes(obj))
+                const index = draft.pages[pageIndex].findIndex((v) => v.postId === parent?.postId)
 
-                  draft.pages[pageIndex][postIndex].Comments.unshift({
-                    userId: me?.user?.email as string
-                  })
+                draft.pages[pageIndex][index].Comments = [
+                  { userId: me?.user?.email as string },
+                  ...draft.pages[pageIndex][index].Comments
+                ]
+                draft.pages[pageIndex][index]._count.Comments += 1
 
-                  draft.pages[pageIndex][postIndex]._count.Comments += 1
-                })
-              )
-            }
-          } else if (value && value.postId === parent?.postId) {
-            queryClient.setQueryData(
-              queryKey,
-              produce(value, (draft) => {
-                draft.Comments.unshift({
-                  userId: me?.user?.email as string
-                })
+                draft.pages[0].unshift(newPost)
+              }
+            })
+
+            queryClient.setQueryData(queryKey, updatedValue)
+          } else if (value) {
+            // 단일 포스트 데이터인 경우
+            const updatedValue = produce(value, (draft) => {
+              if (draft.postId === parent?.postId) {
+                draft.Comments = [{ userId: me?.user?.email as string }, ...draft.Comments]
                 draft._count.Comments += 1
-              })
-            )
+              }
+            })
+
+            queryClient.setQueryData(queryKey, updatedValue)
           }
         }
       })
-      await queryClient.invalidateQueries({
-        queryKey: ['trends']
-      })
+
+      await queryClient.invalidateQueries({ queryKey: ['trends'] })
     },
     onError(error) {
       console.error(error)

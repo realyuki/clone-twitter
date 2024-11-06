@@ -1,6 +1,7 @@
 'use client'
 
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { produce } from 'immer'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useSession } from 'next-auth/react'
@@ -14,73 +15,53 @@ type Props = {
 export default function FollowRecommend({ user }: Props) {
   const { data: session } = useSession()
   const followed = !!user.Followers?.find((v) => v.id === session?.user?.email)
-  console.log('followed', followed)
   const queryClient = useQueryClient()
   const follow = useMutation({
     mutationFn: (userId: string) => {
-      console.log('follow', userId)
       return fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/users/${userId}/follow`, {
         credentials: 'include',
         method: 'post'
       })
     },
     onMutate(userId: string) {
-      const value: User[] | undefined = queryClient.getQueryData(['users', 'followRecommends'])
-      if (value) {
-        const index = value.findIndex((v) => v.id === userId)
-        console.log('follow onMutate', value, userId, index)
-        const shallow = [...value]
-        shallow[index] = {
-          ...shallow[index],
-          Followers: [{ id: session?.user?.email as string }],
-          _count: {
-            ...shallow[index]._count,
-            Followers: shallow[index]._count?.Followers + 1
+      queryClient.setQueryData(['users', 'followRecommends'], (value: User[] | undefined) =>
+        produce(value, (draft) => {
+          const userToUpdate = draft?.find((v) => v.id === userId)
+          if (userToUpdate) {
+            userToUpdate.Followers = [{ id: session?.user?.email as string }]
+            userToUpdate._count.Followers += 1
           }
-        }
-        queryClient.setQueryData(['users', 'followRecommends'], shallow)
-      }
-      const value2: User | undefined = queryClient.getQueryData(['users', userId])
-      if (value2) {
-        const shallow = {
-          ...value2,
-          Followers: [{ id: session?.user?.email as string }],
-          _count: {
-            ...value2._count,
-            Followers: value2._count?.Followers + 1
+        })
+      )
+
+      queryClient.setQueryData(['users', userId], (value: User | undefined) =>
+        produce(value, (draft) => {
+          if (draft) {
+            draft.Followers = [{ id: session?.user?.email as string }]
+            draft._count.Followers += 1
           }
-        }
-        queryClient.setQueryData(['users', userId], shallow)
-      }
+        })
+      )
     },
     onError(error, userId: string) {
-      const value: User[] | undefined = queryClient.getQueryData(['users', 'followRecommends'])
-      if (value) {
-        const index = value.findIndex((v) => v.id === userId)
-        console.log('follow onError', value, userId, index)
-        const shallow = [...value]
-        shallow[index] = {
-          ...shallow[index],
-          Followers: shallow[index].Followers.filter((v) => v.id !== session?.user?.email),
-          _count: {
-            ...shallow[index]._count,
-            Followers: shallow[index]._count?.Followers - 1
+      queryClient.setQueryData(['users', 'followRecommends'], (value: User[] | undefined) =>
+        produce(value, (draft) => {
+          const userToUpdate = draft?.find((v) => v.id === userId)
+          if (userToUpdate) {
+            userToUpdate.Followers = userToUpdate.Followers.filter((v) => v.id !== session?.user?.email)
+            userToUpdate._count.Followers -= 1
           }
-        }
-        queryClient.setQueryData(['users', 'followRecommends'], shallow)
-        const value2: User | undefined = queryClient.getQueryData(['users', userId])
-        if (value2) {
-          const shallow = {
-            ...value2,
-            Followers: value2.Followers.filter((v) => v.id !== session?.user?.email),
-            _count: {
-              ...value2._count,
-              Followers: value2._count?.Followers - 1
-            }
+        })
+      )
+
+      queryClient.setQueryData(['users', userId], (value: User | undefined) =>
+        produce(value, (draft) => {
+          if (draft) {
+            draft.Followers = draft.Followers.filter((v) => v.id !== session?.user?.email)
+            draft._count.Followers -= 1
           }
-          queryClient.setQueryData(['users', userId], shallow)
-        }
-      }
+        })
+      )
     }
   })
   const unfollow = useMutation({
@@ -92,68 +73,50 @@ export default function FollowRecommend({ user }: Props) {
       })
     },
     onMutate(userId: string) {
-      const value: User[] | undefined = queryClient.getQueryData(['users', 'followRecommends'])
-      if (value) {
-        const index = value.findIndex((v) => v.id === userId)
-        console.log('unfollow onMutate', value, userId, index)
-        const shallow = [...value]
-        shallow[index] = {
-          ...shallow[index],
-          Followers: shallow[index].Followers.filter((v) => v.id !== session?.user?.email),
-          _count: {
-            ...shallow[index]._count,
-            Followers: shallow[index]._count?.Followers - 1
+      queryClient.setQueryData(['users', 'followRecommends'], (value: User[] | undefined) =>
+        produce(value, (draft) => {
+          const userToUpdate = draft?.find((v) => v.id === userId)
+          if (userToUpdate) {
+            userToUpdate.Followers = userToUpdate.Followers.filter((v) => v.id !== session?.user?.email)
+            userToUpdate._count.Followers -= 1
           }
-        }
-        queryClient.setQueryData(['users', 'followRecommends'], shallow)
-        const value2: User | undefined = queryClient.getQueryData(['users', userId])
-        if (value2) {
-          const shallow = {
-            ...value2,
-            Followers: value2.Followers.filter((v) => v.id !== session?.user?.email),
-            _count: {
-              ...value2._count,
-              Followers: value2._count?.Followers - 1
-            }
+        })
+      )
+
+      queryClient.setQueryData(['users', userId], (value: User | undefined) =>
+        produce(value, (draft) => {
+          if (draft) {
+            draft.Followers = draft.Followers.filter((v) => v.id !== session?.user?.email)
+            draft._count.Followers -= 1
           }
-          queryClient.setQueryData(['users', userId], shallow)
-        }
-      }
+        })
+      )
     },
     onError(error, userId: string) {
-      const value: User[] | undefined = queryClient.getQueryData(['users', 'followRecommends'])
-      if (value) {
-        const index = value.findIndex((v) => v.id === userId)
-        console.log('unfollow onError', value, userId, index)
-        const shallow = [...value]
-        shallow[index] = {
-          ...shallow[index],
-          Followers: [{ id: session?.user?.email as string }],
-          _count: {
-            ...shallow[index]._count,
-            Followers: shallow[index]._count?.Followers + 1
+      queryClient.setQueryData(['users', 'followRecommends'], (value: User[] | undefined) =>
+        produce(value, (draft) => {
+          const userToUpdate = draft?.find((v) => v.id === userId)
+          if (userToUpdate) {
+            userToUpdate.Followers = [{ id: session?.user?.email as string }]
+            userToUpdate._count.Followers += 1
           }
-        }
-        queryClient.setQueryData(['users', 'followRecommends'], shallow)
-      }
-      const value2: User | undefined = queryClient.getQueryData(['users', userId])
-      if (value2) {
-        const shallow = {
-          ...value2,
-          Followers: [{ id: session?.user?.email as string }],
-          _count: {
-            ...value2._count,
-            Followers: value2._count?.Followers + 1
+        })
+      )
+
+      queryClient.setQueryData(['users', userId], (value: User | undefined) =>
+        produce(value, (draft) => {
+          if (draft) {
+            draft.Followers = [{ id: session?.user?.email as string }]
+            draft._count.Followers += 1
           }
-        }
-        queryClient.setQueryData(['users', userId], shallow)
-      }
+        })
+      )
     }
   })
+
   const onFollow: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.stopPropagation()
     e.preventDefault()
-    console.log('follow', followed, user.id)
     if (followed) {
       unfollow.mutate(user.id)
     } else {
