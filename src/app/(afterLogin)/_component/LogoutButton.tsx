@@ -21,7 +21,7 @@ export default function LogoutButton({ me }: Props) {
     queryClient.invalidateQueries({
       queryKey: ['users']
     })
-    signOut({ redirect: false }).then(() => {
+    signOut().then(() => {
       fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/logout`, {
         method: 'post',
         credentials: 'include'
