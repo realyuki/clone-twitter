@@ -3,7 +3,6 @@
 import type { Session } from '@auth/core/types'
 import { useQueryClient } from '@tanstack/react-query'
 import Image from 'next/image'
-import { useRouter } from 'next/navigation'
 import { signOut } from 'next-auth/react'
 
 type Props = {
@@ -12,7 +11,6 @@ type Props = {
 
 export default function LogoutButton({ me }: Props) {
   const queryClient = useQueryClient()
-  const router = useRouter()
 
   const onLogout = () => {
     queryClient.invalidateQueries({
@@ -21,13 +19,7 @@ export default function LogoutButton({ me }: Props) {
     queryClient.invalidateQueries({
       queryKey: ['users']
     })
-    signOut().then(() => {
-      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/logout`, {
-        method: 'post',
-        credentials: 'include'
-      })
-      router.replace('/')
-    })
+    signOut({ callbackUrl: '/' })
   }
 
   if (!me?.user) return null

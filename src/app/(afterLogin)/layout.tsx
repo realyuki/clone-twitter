@@ -47,7 +47,7 @@ export default async function AfterLoginLayout({ children, modal }: Props) {
           </header>
           <div className="flex grow-[1]">
             <div className="flex w-[1050px] flex-row justify-between">
-              <main className="flex w-[100%] max-w-[600px] shrink-[1] items-start border-border border-x">
+              <main className="flex w-[100%] min-h-[100vh] max-w-[600px] shrink-[1] items-start border-border border-x">
                 <div className="flex w-[100%] grow-[1] flex-col">{children}</div>
               </main>
               <section className="mr-[70px] flex w-[350px] flex-col gap-[12px] py-[12px]">

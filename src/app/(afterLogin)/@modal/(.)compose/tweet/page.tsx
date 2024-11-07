@@ -224,10 +224,10 @@ export default function TweetModal() {
             </div>
             <div>
               <TextareaAutosize
-                placeholder={modalStore.mode === 'comment' ? 'Post your reply' : '무슨 일이 일어나고 있나요?'}
+                placeholder={modalStore.mode === 'comment' ? 'Post your reply' : 'What is Happening?!'}
                 value={content}
                 onChange={onChange}
-                className="w-[100%] resize-none bg-transparent py-[12px] placeholder:text-gray"
+                className="w-[100%] min-h-[90px] resize-none bg-transparent py-[12px] placeholder:text-gray"
               />
             </div>
           </div>
