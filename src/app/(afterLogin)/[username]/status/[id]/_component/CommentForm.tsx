@@ -6,6 +6,8 @@ import Image from 'next/image'
 import { useSession } from 'next-auth/react'
 import { ChangeEventHandler, FormEvent, useRef, useState } from 'react'
 
+import { Post } from '@/model/Post'
+
 type Props = {
   id: string
 }
@@ -16,7 +18,7 @@ export default function CommentForm({ id }: Props) {
   const imageRef = useRef<HTMLInputElement>(null)
   const { data: me } = useSession()
   const queryClient = useQueryClient()
-  const post = queryClient.getQueryData(['posts', id])
+  const post = queryClient.getQueryData(['posts', id]) as Post
 
   const onClickButton = () => {
     imageRef.current?.click()
@@ -35,6 +37,16 @@ export default function CommentForm({ id }: Props) {
           formData.append('images', p.file)
         }
       })
+      return fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/posts/${post.postId}/comments`, {
+        method: 'post',
+        credentials: 'include',
+        body: formData
+      })
+    },
+    async onSuccess() {
+      queryClient.invalidateQueries({ queryKey: ['posts', id, 'comments'] })
+      setContent('')
+      setPreview([])
     }
   })
 
@@ -81,7 +93,7 @@ export default function CommentForm({ id }: Props) {
           />
         </div>
         <div className="flex grow-[1] flex-col">
-          <textarea onChange={onChange} placeholder="Post your reply" />
+          <textarea onChange={onChange} value={content} placeholder="Post your reply1" />
           <div className="flex">
             {preview.map(
               (v, index) =>
