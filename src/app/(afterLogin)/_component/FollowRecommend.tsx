@@ -136,9 +136,9 @@ export default function FollowRecommend({ user }: Props) {
         </div>
         <button
           onClick={onFollow}
-          className="button h-[32px] min-h-[32px] w-[auto] bg-white text-[#0f1419] text-[14px]"
+          className={`button h-[32px] min-h-[32px] w-[auto] text-[14px] ${followed ? 'text-white' : 'bg-white text-[#0f1419]'}`}
         >
-          <span className="leading-none">{followed ? '팔로잉' : '팔로우'}</span>
+          <span className="leading-none">{followed ? 'Following' : 'Follow'}</span>
         </button>
       </div>
     </Link>

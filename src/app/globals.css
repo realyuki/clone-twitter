@@ -70,7 +70,8 @@
   html {
     height: 100%;
   }
-  input, textarea {
+  input,
+  textarea {
     background: none;
     outline: none;
     resize: none;
@@ -79,7 +80,7 @@
 
 @layer components {
   .button {
-    @apply flex min-h-[40px] w-[300px] min-w-[36px] max-w-[380px] items-center justify-center rounded-[9999px] border-[1px] border-solid border-[#536471] px-[16px] text-[15px] font-bold text-[#1d9cf0];
+    @apply hover:opacity-90 flex min-h-[40px] w-[300px] min-w-[36px] max-w-[380px] items-center justify-center rounded-[9999px] border-[1px] border-solid border-[#536471] px-[16px] text-[15px] font-bold text-[#1d9cf0];
   }
 
   .input {

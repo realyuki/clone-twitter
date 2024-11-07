@@ -158,22 +158,29 @@ export default function UserInfo({ username, session }: Props) {
         </div>
       </div>
       <div className="relative">
-        <div className="h-[100px]">{/* <img src={user.bannerImage} alt="" /> */}</div>
-        <div className="absolute left-16 mt-[-67px] w-[145px]">
+        <div className="h-[200px] bg-gray"></div>
+        <div className="px-[16px]">
           <Image
-            width={40}
-            height={40}
+            width={140}
+            height={140}
             src={user.image}
             alt={username}
-            className="rounded-16 border-4 border-black border-solid w-[64px] h-[64px]"
+            className="rounded-[50%] mt-[-70px] border-4 border-black border-solid"
           />
         </div>
       </div>
       <div className="flex flex-col">
         <div className="flex justify-end px-[16px] py-[12px]">
-          {user.id !== session?.user?.email && <button onClick={onFollow}>{followed ? '팔로잉' : '팔로우'}</button>}
+          {user.id !== session?.user?.email && (
+            <button
+              onClick={onFollow}
+              className={`button h-[32px] min-h-[32px] w-[auto] text-[14px] ${followed ? 'text-white' : 'bg-white text-[#0f1419]'}`}
+            >
+              {followed ? 'Following' : 'Follow'}
+            </button>
+          )}
         </div>
-        <div className="flex flex-col px-[16px] py-[12px]">
+        <div className="flex flex-col px-[16px] py-[12px] border-border border-b border-solid">
           <strong className="font-bold text-[20px]">{user.nickname}</strong>
           <span className="text-[15px] text-gray">@{user.id}</span>
         </div>
