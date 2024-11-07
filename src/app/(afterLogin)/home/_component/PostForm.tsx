@@ -35,26 +35,12 @@ export default function PostForm({ me }: Props) {
         body: formData
       })
     },
-    async onSuccess(response) {
-      const newPost = await response.json()
+    async onSuccess() {
       setContent('')
       setPreview([])
 
-      const updatePostList = (key: string) => {
-        queryClient.setQueryData(['posts', key], (prevData: { pages: Post[][] }) =>
-          produce(prevData, (draft) => {
-            draft.pages[0].unshift(newPost)
-          })
-        )
-      }
-
-      if (queryClient.getQueryData(['posts', 'recommends'])) {
-        updatePostList('recommends')
-      }
-
-      if (queryClient.getQueryData(['posts', 'followings'])) {
-        updatePostList('followings')
-      }
+      queryClient.invalidateQueries({ queryKey: ['posts', 'recommends'] })
+      queryClient.invalidateQueries({ queryKey: ['posts', 'followings'] })
     }
   })
 
@@ -110,7 +96,7 @@ export default function PostForm({ me }: Props) {
           <TextareaAutosize
             value={content}
             onChange={onChange}
-            placeholder="What is happening?!"
+            placeholder="What is happening?!222"
             className="w-[100%] resize-none bg-transparent py-[12px] placeholder:text-gray"
           />
           <div className="flex">
