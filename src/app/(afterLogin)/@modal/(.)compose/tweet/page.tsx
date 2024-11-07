@@ -49,6 +49,15 @@ export default function TweetModal() {
         credentials: 'include',
         body: formData
       })
+    },
+    onSuccess() {
+      setContent('')
+      setPreview([])
+      router.push('/')
+    },
+    onError(error) {
+      console.error(error)
+      alert('업로드 중 에러가 발생했습니다.')
     }
   })
 
@@ -224,7 +233,7 @@ export default function TweetModal() {
             </div>
             <div>
               <TextareaAutosize
-                placeholder={modalStore.mode === 'comment' ? 'Post your reply' : 'What is Happening?!'}
+                placeholder={modalStore.mode === 'comment' ? 'Post your reply' : 'What is Happening?!111'}
                 value={content}
                 onChange={onChange}
                 className="w-[100%] min-h-[90px] resize-none bg-transparent py-[12px] placeholder:text-gray"
