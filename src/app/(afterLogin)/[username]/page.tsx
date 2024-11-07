@@ -1,4 +1,4 @@
-import { HydrationBoundary, QueryClient } from '@tanstack/react-query'
+import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query'
 import UserInfo from './_component/UserInfo'
 import UserPosts from './_component/UserPosts'
 import { getUserPosts } from './_lib/getUserPost'
@@ -36,9 +36,11 @@ export default async function Profile({ params }: Props) {
     queryFn: getUserPosts
   })
 
+  const dehydratedState = dehydrate(queryClient)
+
   return (
     <div>
-      <HydrationBoundary>
+      <HydrationBoundary state={dehydratedState}>
         <UserInfo username={username} session={session} />
         <div>
           <UserPosts username={username} />
