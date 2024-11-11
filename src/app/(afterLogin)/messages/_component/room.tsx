@@ -7,6 +7,8 @@ import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import { useRouter } from 'next/navigation'
 
+import { Avatar } from '@/app/(afterLogin)/_component/_ui'
+
 dayjs.locale('ko')
 dayjs.extend(relativeTime)
 
@@ -28,7 +30,7 @@ export default function Room() {
   return (
     <div onClickCapture={onClick} className="flex px-[16px] py-[12px]">
       <div className="mr-[16px]">
-        <img width={40} height={40} src={faker.image.avatar()} alt="" className="rounded-[100%]" />
+        <Avatar src={faker.image.avatar()} alt="" />
       </div>
       <div className="flex flex-col">
         <div>

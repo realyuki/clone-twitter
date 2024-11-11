@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { useSession } from 'next-auth/react'
 import { ChangeEventHandler, FormEvent, useRef, useState } from 'react'
 
+import { Avatar } from '@/app/(afterLogin)/_component/_ui'
 import { Post } from '@/model/Post'
 
 type Props = {
@@ -84,13 +85,7 @@ export default function CommentForm({ id }: Props) {
     <form onSubmit={mutation.mutate} className="border-border border-b border-solid px-[16px] py-[14px]">
       <div className="flex flex-row">
         <div>
-          <Image
-            width={40}
-            height={40}
-            src={me?.user?.image as string}
-            alt={me?.user?.id as string}
-            className="mr-[8px] rounded-[100%]"
-          />
+          <Avatar src={me?.user?.image as string} alt={me?.user?.id as string} className="mr-[8px]" />
         </div>
         <div className="flex grow-[1] flex-col">
           <textarea onChange={onChange} value={content} placeholder="Post your reply1" />

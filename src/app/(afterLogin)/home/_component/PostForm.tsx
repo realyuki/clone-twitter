@@ -7,7 +7,7 @@ import type { Session } from 'next-auth'
 import { type ChangeEventHandler, FormEvent, useRef, useState } from 'react'
 import TextareaAutosize from 'react-textarea-autosize'
 
-import { Post } from '@/model/Post'
+import { Avatar } from '@/app/(afterLogin)/_component/_ui'
 
 interface Props {
   me: Session | null
@@ -84,13 +84,7 @@ export default function PostForm({ me }: Props) {
     <form onSubmit={mutation.mutate}>
       <div className="flex w-[100%] border-border border-b px-[16px] py-[12px]">
         <div>
-          <Image
-            width={40}
-            height={40}
-            src={me?.user?.image as string}
-            alt={(me?.user?.id as string) || ''}
-            className="mr-[8px] rounded-[100%]"
-          />
+          <Avatar src={me?.user?.image as string} alt={(me?.user?.id as string) || ''} className="mr-[8px]" />
         </div>
         <div className="grow-[1]">
           <TextareaAutosize

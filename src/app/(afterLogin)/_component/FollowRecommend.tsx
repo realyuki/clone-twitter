@@ -2,11 +2,11 @@
 
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
-import Image from 'next/image'
 import Link from 'next/link'
 import { useSession } from 'next-auth/react'
 import { MouseEventHandler } from 'react'
 
+import { Avatar } from '@/app/(afterLogin)/_component/_ui'
 import type { User } from '@/model/User'
 
 type Props = {
@@ -128,7 +128,7 @@ export default function FollowRecommend({ user }: Props) {
     <Link href={`/${user.id}`}>
       <div className="flex flex-row px-[16px] py-[12px]">
         <div className="mr-[8px] h-[40px] w-[40px]">
-          <Image width={40} height={40} src={user.image} alt={user.id} className="rounded-[100%] h-[40px]" />
+          <Avatar src={user.image} alt={user.id} />
         </div>
         <div className="flex grow-[1] flex-col">
           <span className="text-[15px]">{user.nickname}</span>

@@ -3,10 +3,10 @@
 import { Session } from '@auth/core/types'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
-import Image from 'next/image'
 import { MouseEventHandler } from 'react'
 import { getUser } from '../_lib/getUser'
 
+import { Avatar } from '@/app/(afterLogin)/_component/_ui'
 import BackButton from '@/app/(afterLogin)/_component/BackButton'
 import type { User } from '@/model/User'
 
@@ -160,13 +160,7 @@ export default function UserInfo({ username, session }: Props) {
       <div className="relative">
         <div className="h-[200px] bg-gray"></div>
         <div className="px-[16px]">
-          <Image
-            width={140}
-            height={140}
-            src={user.image}
-            alt={username}
-            className="rounded-[50%] mt-[-70px] border-4 border-black border-solid"
-          />
+          <Avatar src={user.image} alt={username} className="mt-[-70px] border-4 border-black border-solid" />
         </div>
       </div>
       <div className="flex flex-col">

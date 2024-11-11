@@ -1630,6 +1630,7 @@ __metadata:
     react-dom: "npm:^18"
     react-intersection-observer: "npm:^9.13.1"
     react-textarea-autosize: "npm:^8.5.4"
+    tailwind-merge: "npm:^2.5.4"
     tailwindcss: "npm:^3.4.1"
     typescript: "npm:^5.3.3"
     vitest: "npm:^2.1.1"
@@ -5194,6 +5195,13 @@ __metadata:
     "@pkgr/core": "npm:^0.1.0"
     tslib: "npm:^2.6.2"
   checksum: 10c0/d8b89e1bf30ba3ffb469d8418c836ad9c0c062bf47028406b4d06548bc66af97155ea2303b96c93bf5c7c0f0d66153a6fbd6924c76521b434e6a9898982abc2e
+  languageName: node
+  linkType: hard
+
+"tailwind-merge@npm:^2.5.4":
+  version: 2.5.4
+  resolution: "tailwind-merge@npm:2.5.4"
+  checksum: 10c0/6c3d2a1d44344f373859f005e6366f0dbd7f66131d330a51dbe823dab08f71c388b2efcbb2b6a2170ca469581d27079c25cd40c234ca1356c4893ae99c2febb3
   languageName: node
   linkType: hard
 

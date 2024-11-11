@@ -11,6 +11,7 @@ import { useSession } from 'next-auth/react'
 import { ChangeEventHandler, FormEvent, FormEventHandler, useRef, useState } from 'react'
 import TextareaAutosize from 'react-textarea-autosize'
 
+import { Avatar } from '@/app/(afterLogin)/_component/_ui'
 import { Post } from '@/model/Post'
 import { useModalStore } from '@/store/modal'
 
@@ -196,13 +197,7 @@ export default function TweetModal() {
             <div>
               <div className="flex gap-[8px] text-[15px]">
                 <div>
-                  <Image
-                    width={40}
-                    height={40}
-                    src={parent.User.image}
-                    alt={parent.User.id}
-                    className="rounded-[50%]"
-                  />
+                  <Avatar src={parent.User.image} alt={parent.User.id} />
                 </div>
                 <div>
                   <div className="flex text-gray">
@@ -223,13 +218,7 @@ export default function TweetModal() {
           )}
           <div className="flex gap-[8px] mt-[12px]">
             <div>
-              <Image
-                width={40}
-                height={40}
-                src={me?.user?.image as string}
-                alt={me?.user?.email as string}
-                className="rounded-[50%]"
-              />
+              <Avatar src={me?.user?.image as string} alt={me?.user?.email as string} />
             </div>
             <div>
               <TextareaAutosize
@@ -245,17 +234,7 @@ export default function TweetModal() {
               (v, index) =>
                 v && (
                   <div key={index} style={{ flex: 1 }} onClick={onRemoveImage(index)}>
-                    <Image
-                      src={v.dataUrl}
-                      width={40}
-                      height={40}
-                      alt="미리보기"
-                      style={{
-                        width: '100%',
-                        objectFit: 'contain',
-                        maxHeight: 100
-                      }}
-                    />
+                    <Image src={v.dataUrl} alt="미리보기" className="w-[100%] max-h-[100px] object-contain" />
                   </div>
                 )
             )}

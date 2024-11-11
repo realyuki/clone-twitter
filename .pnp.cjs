@@ -57,6 +57,7 @@ const RAW_RUNTIME_STATE =
           ["react-dom", "virtual:111ea95f971b5cc54f58c0f073eacb99ae4cb04e15db70f00ea3bd33c31d168965280e65e6c6baf3afa989c2ba22046812f8604d8b6ad86cf7a52337bd1bb40f#npm:18.3.1"],\
           ["react-intersection-observer", "virtual:111ea95f971b5cc54f58c0f073eacb99ae4cb04e15db70f00ea3bd33c31d168965280e65e6c6baf3afa989c2ba22046812f8604d8b6ad86cf7a52337bd1bb40f#npm:9.13.1"],\
           ["react-textarea-autosize", "virtual:111ea95f971b5cc54f58c0f073eacb99ae4cb04e15db70f00ea3bd33c31d168965280e65e6c6baf3afa989c2ba22046812f8604d8b6ad86cf7a52337bd1bb40f#npm:8.5.4"],\
+          ["tailwind-merge", "npm:2.5.4"],\
           ["tailwindcss", "npm:3.4.13"],\
           ["typescript", "patch:typescript@npm%3A5.6.2#optional!builtin<compat/typescript>::version=5.6.2&hash=8c6c40"],\
           ["vitest", "virtual:111ea95f971b5cc54f58c0f073eacb99ae4cb04e15db70f00ea3bd33c31d168965280e65e6c6baf3afa989c2ba22046812f8604d8b6ad86cf7a52337bd1bb40f#npm:2.1.1"],\
@@ -2151,6 +2152,7 @@ const RAW_RUNTIME_STATE =
           ["react-dom", "virtual:111ea95f971b5cc54f58c0f073eacb99ae4cb04e15db70f00ea3bd33c31d168965280e65e6c6baf3afa989c2ba22046812f8604d8b6ad86cf7a52337bd1bb40f#npm:18.3.1"],\
           ["react-intersection-observer", "virtual:111ea95f971b5cc54f58c0f073eacb99ae4cb04e15db70f00ea3bd33c31d168965280e65e6c6baf3afa989c2ba22046812f8604d8b6ad86cf7a52337bd1bb40f#npm:9.13.1"],\
           ["react-textarea-autosize", "virtual:111ea95f971b5cc54f58c0f073eacb99ae4cb04e15db70f00ea3bd33c31d168965280e65e6c6baf3afa989c2ba22046812f8604d8b6ad86cf7a52337bd1bb40f#npm:8.5.4"],\
+          ["tailwind-merge", "npm:2.5.4"],\
           ["tailwindcss", "npm:3.4.13"],\
           ["typescript", "patch:typescript@npm%3A5.6.2#optional!builtin<compat/typescript>::version=5.6.2&hash=8c6c40"],\
           ["vitest", "virtual:111ea95f971b5cc54f58c0f073eacb99ae4cb04e15db70f00ea3bd33c31d168965280e65e6c6baf3afa989c2ba22046812f8604d8b6ad86cf7a52337bd1bb40f#npm:2.1.1"],\
@@ -6296,6 +6298,15 @@ const RAW_RUNTIME_STATE =
           ["synckit", "npm:0.9.1"],\
           ["@pkgr/core", "npm:0.1.1"],\
           ["tslib", "npm:2.7.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["tailwind-merge", [\
+      ["npm:2.5.4", {\
+        "packageLocation": "./.yarn/cache/tailwind-merge-npm-2.5.4-cdd9f9e9ac-6c3d2a1d44.zip/node_modules/tailwind-merge/",\
+        "packageDependencies": [\
+          ["tailwind-merge", "npm:2.5.4"]\
         ],\
         "linkType": "HARD"\
       }]\

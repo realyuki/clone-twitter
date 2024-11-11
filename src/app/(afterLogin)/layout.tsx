@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import FollowRecommendsSection from './_component/FollowRecommendsSection'
 import LogoutButton from './_component/LogoutButton'
@@ -7,6 +6,7 @@ import RightSearchZone from './_component/RightSearchZone'
 import RQProvider from './_component/RQProvider'
 import TrendSection from './_component/TrendSection'
 
+import { Avatar } from '@/app/(afterLogin)/_component/_ui'
 import { auth } from '@/auth'
 
 interface Props {
@@ -25,7 +25,7 @@ export default async function AfterLoginLayout({ children, modal }: Props) {
             <section className="px-[8px]">
               <div className="w-[275px]">
                 <Link href={`${session?.user ? 'home' : '/'}`}>
-                  <Image width={40} height={40} src="/yRsRRjGO.jpg" alt="x.com" />
+                  <Avatar src="/yRsRRjGO.jpg" alt="x.com" />
                 </Link>
                 {session?.user && (
                   <>

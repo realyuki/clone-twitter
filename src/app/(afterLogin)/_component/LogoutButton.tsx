@@ -2,8 +2,9 @@
 
 import type { Session } from '@auth/core/types'
 import { useQueryClient } from '@tanstack/react-query'
-import Image from 'next/image'
 import { signOut } from 'next-auth/react'
+
+import { Avatar } from '@/app/(afterLogin)/_component/_ui'
 
 type Props = {
   me: Session
@@ -28,13 +29,7 @@ export default function LogoutButton({ me }: Props) {
     <button onClick={onLogout} className="my-[14px] flex w-[90%] items-center justify-between">
       <div className="flex w-[100%] items-center gap-[12px]">
         <div>
-          <Image
-            width={40}
-            height={40}
-            src={me?.user?.image as string}
-            alt={me?.user?.email as string}
-            className="rounded-[100%] h-[40px]"
-          />
+          <Avatar src={me?.user?.image as string} alt={me?.user?.email as string} />
         </div>
         <div className="flex flex-col items-start">
           <span className="text-[15px]">{me?.user?.name}</span>
