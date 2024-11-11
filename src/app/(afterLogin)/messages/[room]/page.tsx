@@ -6,8 +6,6 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 import Link from 'next/link'
 import BackButton from '../../_component/BackButton'
 
-import { Avatar } from '@/app/(afterLogin)/_component/_ui'
-
 dayjs.locale('ko')
 dayjs.extend(relativeTime)
 
@@ -51,7 +49,7 @@ export default function ChatRoom() {
         </div>
       </div>
       <Link href={user.nickname} className="flex flex-col items-center bg-gray px-[20px] py-[16px]">
-        <Avatar width={64} height={64} src={user.image} alt={user.id} />
+        <img width={64} height={64} src={faker.image.avatar()} alt="" className="rounded-[100%]" />
         <div className="mt-[4px]">
           <b>{user.nickname}</b>
         </div>

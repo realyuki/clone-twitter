@@ -160,7 +160,13 @@ export default function UserInfo({ username, session }: Props) {
       <div className="relative">
         <div className="h-[200px] bg-gray"></div>
         <div className="px-[16px]">
-          <Avatar src={user.image} alt={username} className="mt-[-70px] border-4 border-black border-solid" />
+          <Avatar
+            width={134}
+            height={134}
+            src={user.image}
+            alt={username}
+            className="mt-[-70px] border-4 border-black border-solid bg-black"
+          />
         </div>
       </div>
       <div className="flex flex-col">
